@@ -1,0 +1,1 @@
+# scandinavian-crossword-constructor
