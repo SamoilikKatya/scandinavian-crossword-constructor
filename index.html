@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina+2&display=swap" rel="stylesheet">
+        <title>Создай свой кроссворд!</title>
+    </head>
+
+    <body>       
+        <header>
+            <div class="header-container">
+                <div class="logo">
+                    <img src="img/logo.png" width="60px" height="60px" alt="">
+                </div>
+                    <input type="checkbox" id="menu-checkbox">
+                    <nav role="navigation">
+                        <label for="menu-checkbox" class="toggle-button"
+                        data-open="Меню" data-close="Закрыть" onclick></label>
+                        <ul class="main-menu">
+                            <li><a href="#">Портфолио</a></li>
+                            <li><a href="#">Решить</a></li>
+                            <li><a href="#">Создать</a></li>
+                            <li><a href="#">Выйти</a></li>
+                        </ul>
+                    </nav>
+            </div>
+           </header>
+
+        <main>
+            <div class="content">
+                <div class="crossword">
+                    <div class="crossword-up">
+                        <div class="crossword-table">
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Т</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Т</td>
+                                    <td>Е</td>
+                                    <td>С</td>
+                                    <td>Т</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>С</td>
+                                    <td></td>
+                                    <td>Е</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Т</td>
+                                    <td></td>
+                                    <td>С</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Т</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="button-row">
+                            <button class="up"></button>
+                            <button class="down"></button>
+                        </div>
+                    </div>
+                    <div class="button-column">
+                        <button class="left"></button>
+                        <button class="right"></button>
+                    </div>
+                </div>
+                <!--<div class="instructions">
+                    <p class="instructuction"><b>Как составить кроссворд?</b><br>
+                        <i>Шаг 1.</i> Укажите регион для добавления нового слова.<br>
+                        <i>Шаг 2.</i> На правой панели введите своё слово.<br>
+                        <i>Шаг 3.</i> Придумайте и запишите определение для слова.<br>
+                        ...<br>
+                        <i>Шаг 4.</i> Сохраните кроссворд.<br>
+                        <i>Шаг 5.</i> Получите ссылку, по которой ваши друзья смогут открыть этот кроссворд для разгадывания.<br>
+                        <i>Шаг 6.</i> Следите за статистикой.</p>
+                </div>-->
+                <div class="definition">
+                    <p class="my-word">Ваше слово:</p>
+                    <table class="word">
+                        <th>
+                            <td>Т</td>
+                            <td>Е</td>
+                            <td>С</td>
+                            <td>Т</td>
+                        </th>
+                    </table>
+                    <p class="my-question">Ваш вопрос:</p>
+                    <textarea class="question"></textarea>
+                    <div class="buttons-word">
+                        <button class="save-word">Сохранить</button>
+                        <button class="delete-word">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+            
+    
+
+        <script
+            src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+            crossorigin="anonymous">
+        </script>
+    </body>
+
+</html>

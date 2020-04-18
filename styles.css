@@ -1,0 +1,259 @@
+body {
+    font-family: 'Baloo Bhaina 2', cursive;
+    background: #E9F3FF;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+    display: flex;
+}
+a { 
+    text-decoration: none;
+}
+header {
+    background: radial-gradient(#1D59A0, #8CBDF9);
+    padding: 0;
+    margin: 0;
+}
+.header-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+}
+.header-container a {
+    color: #000;
+    font-size: 16px;
+    margin-right: 63px;
+    padding: 20px 6px;
+}
+.header-container a:hover {
+    background: #ffea00;
+} 
+#menu-checkbox {
+    display: none;
+}
+ul {
+    display: flex;
+}
+nav {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 60px;
+}
+.logo {
+    margin-top: 10px;
+}
+
+.content {
+    width: 90%;
+    margin: 20px 5%;
+    display: grid;
+    grid-auto-columns: 60% 30%;
+    min-width: 100%;
+}
+.crossword {
+    grid-column: 1;
+    margin: 0;
+}
+.crossword-up {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+.crossword-table {
+    margin: 0;
+    grid-row: 1;
+    grid-column: 1;
+}
+.button-row {
+    margin: 0;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.button-column {
+    margin: 10px auto;
+    display: flex;
+    justify-content: flex-start;
+}
+.up {
+    margin: 0;
+    margin-bottom: 5px;
+    background: url("img/up.png") no-repeat;
+    background-size: 25px 50px;
+}
+.down {
+    margin: 0;
+    background: url("img/down.png") no-repeat;
+    background-size: 25px 50px;
+}
+.left {
+    margin: 0;
+    margin-right: 5px;
+    background: url("img/left.png") no-repeat;
+    background-size: 50px 25px;
+}
+.right {
+    margin: 0;
+    background: url("img/right.png") no-repeat;
+    background-size: 50px 25px;
+}
+.button-row button {
+    width: 30px;
+    height: 50px;
+}
+.button-column button {
+    width: 50px;
+    height: 30px;
+}
+table {
+    background-color: #D8E7F9;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+}
+table, th, td {
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+}
+td {
+    width: 40px;
+    height: 40px;
+    color: #100873;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.instructions {
+    grid-column: 2;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #8CBDF9; 
+    background: #D8E7F9;  
+}
+.definition {
+    grid-column: 2;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #8CBDF9;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #D8E7F9;
+}
+.definition p {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.question {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    height: 100px;
+    background: #E9F3FF;
+    color: #100873;
+}
+.buttons-word {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons-word button {
+    height: 30px;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Baloo Bhaina 2', cursive;
+    font-weight: bold;
+    background: linear-gradient(#8CBDF9, #1D59A0) ;
+}
+.definition table {
+    background: #E9F3FF;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 420px) {
+    .header-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    .main-menu {
+        display: none;
+    }
+    .main-menu li {
+        width: 100%;
+        display: block;
+        font-size: 12px;
+    }
+    .main-menu a {
+        display: block;
+        padding: 8px;
+    }
+    .toggle-button {
+        text-align: center;
+        display: block;
+        cursor: pointer;
+        color: #000;
+        margin-top: 20px;
+    }
+    .toggle-button:after {
+        content: attr(data-open);
+        display: block;
+        margin-top: 20px;
+    }
+    .main-menu a {
+        background: linear-gradient(#8CBDF9, #1D59A0) ;
+    }
+    #menu-checkbox:checked + nav[role="navigation"] .main-menu {
+        display: block;
+    }
+    #menu-checkbox:checked + nav[role="navigation"] .toggle-button:after {
+        content: attr(data-close);
+    }
+    .header-container a {
+        margin-right: -65px;
+    }
+    .main-menu {
+        position: relative;
+        top: 30px;
+        right: 115px;
+    }
+    .content {
+        width: 100%;
+        display: inline;
+        margin: 10px, 5%,;
+    }
+    .crossword {
+        margin: 5px;
+    }
+    .instructions {
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 1px solid #D8E7F9;
+    }
+    .definition {
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 1px solid #D8E7F9;
+    }
+
+}
