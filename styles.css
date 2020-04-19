@@ -152,7 +152,7 @@ td {
     padding-right: 10px;
     background: #D8E7F9;
 }
-.definition p {
+.definition p, .save p {
     font-size: 16px;
     font-weight: bold;
     margin: 10px 0;
@@ -170,7 +170,7 @@ td {
     display: flex;
     justify-content: space-between;
 }
-.buttons-word, .buttons-autorization button {
+.buttons-word button, .buttons-autorization button, .save button {
     height: 30px;
     width: 40%;
     overflow: hidden;
@@ -221,6 +221,27 @@ td {
     font-weight: bold;
     background: linear-gradient(#8CBDF9, #1D59A0) ;
 }
+.save {
+    grid-column: 1;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #8CBDF9;  
+    background: #D8E7F9;
+}
+.save input {
+    margin: 5px;
+    height: 20px;
+    font-size: 25px;
+    color: #100873;
+    background: #E9F3FF;
+}
+.save button {
+    width: 60%;
+    margin-top: 10px;
+}
+
 
 
 
@@ -294,16 +315,11 @@ td {
         margin-top: 30px;
         margin-left: 30px;
     }
-    .instructions {
+    .instructions, .definition {
         margin: 0;
         margin-left: 30px;
-        border: 1px solid #D8E7F9;
-        width: 90%;
-    }
-    .definition {
-        margin: 0;
-        margin-left: 30px;
-        border: 1px solid #D8E7F9;
+        margin-top: 30px;
+        border: 1px solid #8CBDF9;
         width: 90%;
     }
     td {
@@ -311,12 +327,12 @@ td {
         height: 50px;
         font-size: 23px;
     }
-    .buttons-word, .buttons-autorization button {
+    .buttons-word button, .buttons-autorization button, .save button {
         height: 50px;
         font-size: 23px;
     }
-    .definition p {
-        font-size   : 23px;
+    .definition p, .save p {
+        font-size: 23px;
     }
     .button-row button {
         width: 45px;
@@ -331,6 +347,20 @@ td {
     }
     .left, .right {
         background-size: 75px 38px;
+    }
+    .save {
+        margin: 0;
+        margin-left: 30px;
+        margin-top: 30px;
+        width: 90%;
+    }
+    .save input {
+        height: 30px;
+        
+    }
+    .save button {
+        width: 60%;
+        margin-top: 10px;
     }
 
     .autorisation {
@@ -353,4 +383,5 @@ td {
         font-size: 23px;
         margin-top: 15px;
     }
+    
 }
