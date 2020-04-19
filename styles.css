@@ -1,6 +1,8 @@
 body {
     font-family: 'Baloo Bhaina 2', cursive;
     background: #E9F3FF;
+    margin: 0;
+    padding: 0;
 }
 * {
     padding: 0;
@@ -52,14 +54,15 @@ nav {
 
 .content {
     width: 90%;
-    margin: 20px 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: grid;
     grid-auto-columns: 60% 30%;
     min-width: 100%;
 }
 .crossword {
     grid-column: 1;
-    margin: 0;
+    margin: 0 auto;
 }
 .crossword-up {
     display: flex;
@@ -190,11 +193,19 @@ td {
 
 
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 1000px) {
     .header-container {
+        margin: 0;
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        font-size: 23px;
+    }
+    .header-container a {
+        font-size: 23px;
+    }
+    .logo {
+        margin-left: 30px;
     }
     .main-menu {
         display: none;
@@ -202,7 +213,7 @@ td {
     .main-menu li {
         width: 100%;
         display: block;
-        font-size: 12px;
+        font-size: 23px;
     }
     .main-menu a {
         display: block;
@@ -214,6 +225,7 @@ td {
         cursor: pointer;
         color: #000;
         margin-top: 20px;
+        margin-right: 50px;
     }
     .toggle-button:after {
         content: attr(data-open);
@@ -238,22 +250,51 @@ td {
         right: 115px;
     }
     .content {
-        width: 100%;
+        width: 90%;
         display: inline;
-        margin: 10px, 5%,;
+        margin: 0;
     }
     .crossword {
-        margin: 5px;
+        margin: 0;
+        margin-top: 30px;
+        margin-left: 30px;
     }
     .instructions {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin: 0;
+        margin-left: 30px;
         border: 1px solid #D8E7F9;
+        width: 90%;
     }
     .definition {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin: 0;
+        margin-left: 30px;
         border: 1px solid #D8E7F9;
+        width: 90%;
     }
-
+    td {
+        width: 50px;
+        height: 50px;
+        font-size: 23px;
+    }
+    .buttons-word button {
+        height: 50px;
+        font-size: 23px;
+    }
+    .definition p {
+        font-size   : 23px;
+    }
+    .button-row button {
+        width: 45px;
+        height: 75px;
+    }
+    .button-column button {
+        width: 75px;
+        height: 45px;
+    }
+    .up, .down {
+        background-size: 38px 75px;
+    }
+    .left, .right {
+        background-size: 75px 38px;
+    }
 }
