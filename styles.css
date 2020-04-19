@@ -170,7 +170,7 @@ td {
     display: flex;
     justify-content: space-between;
 }
-.buttons-word button {
+.buttons-word, .buttons-autorization button {
     height: 30px;
     width: 40%;
     overflow: hidden;
@@ -184,8 +184,43 @@ td {
 }
 
 
-
-
+.autorisation {
+    width: 40%;
+    margin: 100px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #8CBDF9;
+    background: #D8E7F9;
+}
+.autorisation p {
+    color: #100873;
+    margin: -5px auto;
+    font-weight: bold;
+    font-size: 25px;
+}
+.autorisation input {
+    margin: 5px;
+    height: 30px;
+    font-size: 25px;
+    color: #100873;
+    background: #E9F3FF;
+}
+.buttons-autorization {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.registr {
+    margin: 10px auto;
+    height: 30px;
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Baloo Bhaina 2', cursive;
+    font-weight: bold;
+    background: linear-gradient(#8CBDF9, #1D59A0) ;
+}
 
 
 
@@ -276,7 +311,7 @@ td {
         height: 50px;
         font-size: 23px;
     }
-    .buttons-word button {
+    .buttons-word, .buttons-autorization button {
         height: 50px;
         font-size: 23px;
     }
@@ -296,5 +331,26 @@ td {
     }
     .left, .right {
         background-size: 75px 38px;
+    }
+
+    .autorisation {
+        width: 60%;
+        margin: 200px auto;
+    }
+    .autorisation p {
+        font-size: 40px;
+    }
+    .autorisation input {
+        margin: 10px 5px;
+        height: 40px;
+        font-size: 32px;
+    }
+    .autorisation button {
+        font-size: 27px;
+    }
+    .registr {
+        height: 50px;
+        font-size: 23px;
+        margin-top: 15px;
     }
 }
