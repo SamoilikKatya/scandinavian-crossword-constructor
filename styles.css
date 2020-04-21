@@ -182,6 +182,25 @@ td {
 .definition table {
     background: #E9F3FF;
 }
+.save {
+    grid-column: 1;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #8CBDF9;  
+    background: #D8E7F9;
+}
+.save input {
+    margin: 5px;
+    height: 20px;
+    font-size: 25px;
+    color: #100873;
+    background: #E9F3FF;
+}
+.save button {
+    margin-top: 10px;
+}
 
 
 .autorisation {
@@ -221,30 +240,38 @@ td {
     font-weight: bold;
     background: linear-gradient(#8CBDF9, #1D59A0) ;
 }
-.save {
-    grid-column: 1;
-    margin: 10px auto;
-    padding: 10px;
+
+
+.crossword-list {
     display: flex;
-    flex-direction: column;
-    border: 1px solid #8CBDF9;  
-    background: #D8E7F9;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 16px;
 }
-.save input {
-    margin: 5px;
-    height: 20px;
-    font-size: 25px;
-    color: #100873;
-    background: #E9F3FF;
+.crossword-item {
+    width: 25%;
+    height: 200px;
+    margin: 40px;
+    margin-bottom: 0;
+    padding: 0 10px;
+    border: 1px solid #8CBDF9;
+    background: #D8E7F9; 
+    overflow: auto;
 }
-.save button {
-    width: 60%;
-    margin-top: 10px;
+.item-title {
+    padding: 5px 30%;
+    color:  #100873;
+    font-weight: bold;
 }
 
-
-
-
+.definition > .text-question {
+    font-weight: normal;
+}
+.crossword-solver {
+    margin: 10px auto;
+    margin-top: 0;
+}
 
 
 
@@ -359,7 +386,6 @@ td {
         
     }
     .save button {
-        width: 60%;
         margin-top: 10px;
     }
 
@@ -383,5 +409,23 @@ td {
         font-size: 23px;
         margin-top: 15px;
     }
-    
+
+    .crossword-list {
+        font-size: 23px;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .crossword-item {
+        width: 35%;
+        height: 400px;
+        margin: 60px;
+        margin-bottom: 0;
+    }
+
+    .crossword-solver {
+        margin: 0;
+        margin-top: 30px;
+        margin-left: 30px;
+        padding: 0 5%;
+    }
 }
