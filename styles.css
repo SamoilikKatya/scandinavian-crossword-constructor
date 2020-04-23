@@ -1,6 +1,9 @@
 body {
     font-family: 'Baloo Bhaina 2', cursive;
-    background: #E9F3FF;
+    background-image: url("img/background.jpg"),
+        linear-gradient(30deg, #d8bbb5, #8CBDF9);
+    background-blend-mode: overlay;
+    opacity: 0.85;
     margin: 0;
     padding: 0;
 }
@@ -16,7 +19,19 @@ a {
     text-decoration: none;
 }
 header {
-    background: radial-gradient(#1D59A0, #8CBDF9);
+    background-image: repeating-linear-gradient(60deg,
+    #e7f0ed 0px, #e7f0ed 15px,
+    #d8bbb5 15px, #d8bbb5 25px,
+    #8CBDF9 25px, #8CBDF9 35px,
+    #D8E7F9 35px, #D8E7F9 45px,
+    #ffefd7 45px, #ffefd7 55px),
+        repeating-linear-gradient(-60deg,
+        #e7f0ed 0px, #e7f0ed 15px,
+        #d8bbb5 15px, #d8bbb5 25px,
+        #8CBDF9 25px, #8CBDF9 35px,
+        #D8E7F9 35px, #D8E7F9 45px,
+        #ffefd7 45px, #ffefd7 55px);
+    background-blend-mode: multiply;
     padding: 0;
     margin: 0;
 }
@@ -35,7 +50,9 @@ header {
     padding: 20px 6px;
 }
 .header-container a:hover {
-    background: #ffea00;
+    background: #ffefd7;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px;
 } 
 #menu-checkbox {
     display: none;
@@ -110,10 +127,12 @@ nav {
 .button-row button {
     width: 30px;
     height: 50px;
+    border-radius: 10px/50px;   
 }
 .button-column button {
     width: 50px;
     height: 30px;
+    border-radius: 10px/50px;
 }
 table {
     background-color: #D8E7F9;
@@ -122,6 +141,18 @@ table {
     margin: 0;
     padding: 0;
     table-layout: fixed;
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #E8F4F2;
+
 }
 table, th, td {
     margin: 0;
@@ -138,16 +169,19 @@ td {
 }
 .instructions {
     grid-column: 2;
+    padding: 7px;
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid #8CBDF9; 
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px; 
     background: #D8E7F9;  
 }
 .definition {
     grid-column: 2;
     margin-left: 20px;
     margin-right: 20px;
-    border: 1px solid #8CBDF9;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px;
     padding-left: 10px;
     padding-right: 10px;
     background: #D8E7F9;
@@ -164,6 +198,7 @@ td {
     height: 100px;
     background: #E9F3FF;
     color: #100873;
+    resize: none;
 }
 .buttons-word {
     padding: 20px 0;
@@ -177,10 +212,23 @@ td {
     text-overflow: ellipsis;
     font-family: 'Baloo Bhaina 2', cursive;
     font-weight: bold;
-    background: linear-gradient(#8CBDF9, #1D59A0) ;
+    background-color: #81D4EC;
+    background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
+                    linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
+    border-radius: 10px/50px;
 }
 .definition table {
-    background: #E9F3FF;
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #E8F4F2;
 }
 .save {
     grid-column: 1;
@@ -188,7 +236,8 @@ td {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #8CBDF9;  
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px;  
     background: #D8E7F9;
 }
 .save input {
@@ -209,7 +258,8 @@ td {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #8CBDF9;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px; 
     background: #D8E7F9;
 }
 .autorisation p {
@@ -238,7 +288,10 @@ td {
     text-overflow: ellipsis;
     font-family: 'Baloo Bhaina 2', cursive;
     font-weight: bold;
-    background: linear-gradient(#8CBDF9, #1D59A0) ;
+    background-color: #81D4EC;
+    background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
+                    linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
+    border-radius: 10px/50px;
 }
 
 
@@ -255,7 +308,8 @@ td {
     margin: 40px;
     margin-bottom: 0;
     padding: 0 10px;
-    border: 1px solid #8CBDF9;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px; 
     background: #D8E7F9; 
     overflow: auto;
 }
@@ -316,7 +370,9 @@ td {
         margin-top: 20px;
     }
     .main-menu a {
-        background: linear-gradient(#8CBDF9, #1D59A0) ;
+        background: radial-gradient(#ffefd7 10px,  #D8E7F9 10px);
+        background-size: 20px 20px;
+        border-radius: 10px/50px;
     }
     #menu-checkbox:checked + nav[role="navigation"] .main-menu {
         display: block;
@@ -346,7 +402,6 @@ td {
         margin: 0;
         margin-left: 30px;
         margin-top: 30px;
-        border: 1px solid #8CBDF9;
         width: 90%;
     }
     td {
