@@ -1,11 +1,13 @@
 body {
     font-family: 'Baloo Paaji 2', cursive;
     background-image: url("img/background.jpg"),
-        linear-gradient(30deg, #d8bbb5, #8CBDF9);
+        repeating-linear-gradient(90deg, #d8bbb5, #8CBDF9,  #d8bbb5);
+    background-size: cover;
     background-blend-mode: overlay;
     opacity: 0.85;
     margin: 0;
     padding: 0;
+    padding-bottom: 30px;
 }
 * {
     padding: 0;
@@ -32,13 +34,11 @@ header {
         #D8E7F9 35px, #D8E7F9 45px,
         #ffefd7 45px, #ffefd7 55px);
     background-blend-mode: multiply;
-    padding: 0;
-    margin: 0;
 }
 .header-container {
-    width: 90%;
     margin: 0 auto;
     padding: 5px;
+    padding-right: 0;   
     display: flex;
     justify-content: space-between;
     max-width: 100%;
@@ -73,15 +73,12 @@ nav {
 }
 
 .content {
-    width: 90%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 5%;
     display: grid;
-    grid-auto-columns: 60% 30%;
-    min-width: 100%;
+    grid-template-columns: repeat(7, 1fr);
 }
 .crossword {
-    grid-column: 1;
+    grid-column: 2 / 5;
     margin: 0 auto;
 }
 .crossword-up {
@@ -171,7 +168,7 @@ td {
     text-align: center;
 }
 .instructions {
-    grid-column: 2;
+    grid-column: 5 / 7;
     padding: 7px;
     margin-left: 20px;
     margin-right: 20px;
@@ -180,7 +177,7 @@ td {
     background: #D8E7F9;  
 }
 .definition {
-    grid-column: 2;
+    grid-column: 5 / 7;
     margin-left: 20px;
     margin-right: 20px;
     border: 3px dashed #8CBDF9;
@@ -234,7 +231,7 @@ td {
     background-color: #E8F4F2;
 }
 .save {
-    grid-column: 1;
+    grid-column: 2 / 5;
     margin: 10px auto;
     padding: 10px;
     display: flex;
@@ -246,7 +243,7 @@ td {
 .save input {
     margin: 5px;
     height: 20px;
-    font-size: 25px;
+    font-size: 18px;
     color: #100873;
     background: #E9F3FF;
 }
@@ -376,6 +373,7 @@ td {
 .crossword-solver {
     margin: 10px auto;
     margin-top: 0;
+    grid-column: 2 / 5;
 }
 
 
@@ -384,7 +382,6 @@ td {
 @media screen and (max-width: 1000px) {
     .header-container {
         margin: 0;
-        width: 100%;
         display: flex;
         justify-content: space-between;
         font-size: 23px;
@@ -441,7 +438,6 @@ td {
         right: 115px;
     }
     .content {
-        width: 90%;
         display: inline;
         margin: 0;
     }
@@ -466,7 +462,7 @@ td {
         font-size: 23px;
     }
     .definition p, .save p {
-        font-size: 23px;
+        font-size: 21px;
     }
     .button-row button {
         width: 45px;
