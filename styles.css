@@ -129,12 +129,14 @@ nav {
     width: 30px;
     height: 50px;
     border-radius: 10px/50px;   
+    outline: none;
 }
 .button-column button, .item-title button {
     background-position: center;
     width: 50px;
     height: 30px;
     border-radius: 10px/50px;
+    outline: none;
 }
 table {
     background-color: #D8E7F9;
@@ -392,15 +394,19 @@ input:focus, input:hover{
 .question:focus, .question:hover {
     border: 2px solid #100873;
 }
-button {
+.buttons-word button, .buttons-autorization button, .save button {
     outline: none;
 }
-button:hover {
-    transform: scale(1.05);
-    background: transparent;
-    border: 2px solid #100873;
-}
-button:active {
+
+@media (hover: hover) { 
+    .buttons-word button:hover, .buttons-autorization button:hover, .save button:hover {
+        transform: scale(1.05);
+        background: transparent;
+        border: 2px solid #100873;
+    }
+  }
+
+.buttons-word button:active, .buttons-autorization button:active, .save button:active {
     background-color: #81D4EC;
     background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
                     linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
@@ -575,8 +581,6 @@ button:active {
         padding: 10px;
         padding-bottom: 0;
     }
-
-
 
     .crossword-solver {
         margin: 0;
