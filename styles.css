@@ -105,31 +105,33 @@ nav {
 .up {
     margin: 0;
     margin-bottom: 5px;
-    background: url("img/up.png") no-repeat;
-    background-size: 25px 50px;
+    background: url("img/up.svg") no-repeat;
+    background-size: 35px 50px;
 }
 .down {
     margin: 0;
-    background: url("img/down.png") no-repeat;
-    background-size: 25px 50px;
+    background: url("img/down.svg") no-repeat;
+    background-size: 35px 50px;
 }
 .left {
     margin: 0;
     margin-right: 5px;
-    background: url("img/left.png") no-repeat;
-    background-size: 50px 25px;
+    background: url("img/left.svg") no-repeat;
+    background-size: 50px 35px;
 }
 .right {
     margin: 0;
-    background: url("img/right.png") no-repeat;
-    background-size: 50px 25px;
+    background: url("img/right.svg") no-repeat;
+    background-size: 50px 35px;
 }
 .button-row button {
+    background-position: center;
     width: 30px;
     height: 50px;
     border-radius: 10px/50px;   
 }
 .button-column button, .item-title button {
+    background-position: center;
     width: 50px;
     height: 30px;
     border-radius: 10px/50px;
@@ -199,6 +201,8 @@ td {
     background: #E9F3FF;
     color: #100873;
     resize: none;
+    outline: none;
+    border: 2px solid #8CBDF9
 }
 .buttons-word {
     padding: 20px 0;
@@ -245,7 +249,10 @@ td {
     height: 20px;
     font-size: 18px;
     color: #100873;
-    background: #E9F3FF;
+    background: #D8E7F9 ;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #8CBDF9;
 }
 .save button {
     margin-top: 10px;
@@ -273,7 +280,10 @@ td {
     height: 30px;
     font-size: 25px;
     color: #100873;
-    background: #E9F3FF;
+    background: #D8E7F9 ;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #8CBDF9;
 }
 .buttons-autorization {
     display: flex;
@@ -376,6 +386,32 @@ td {
     grid-column: 2 / 5;
 }
 
+input:focus, input:hover{
+    border-bottom: 2px solid #100873;
+}
+.question:focus, .question:hover {
+    border: 2px solid #100873;
+}
+button {
+    outline: none;
+}
+button:hover {
+    transform: scale(1.05);
+    background: transparent;
+    border: 2px solid #100873;
+}
+button:active {
+    background-color: #81D4EC;
+    background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
+                    linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #100873;
+    border: none;
+}
+
+
+
+
 
 
 
@@ -473,10 +509,10 @@ td {
         height: 45px;
     }
     .up, .down {
-        background-size: 38px 75px;
+        background-size: 55px 75px;
     }
     .left, .right {
-        background-size: 75px 38px;
+        background-size: 75px 55px;
     }
     .save {
         margin: 0;
