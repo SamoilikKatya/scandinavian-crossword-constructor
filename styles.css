@@ -106,37 +106,37 @@ nav {
     margin: 0;
     margin-bottom: 5px;
     background: url("img/up.svg") no-repeat;
+    background-color: #8CBDF9;
     background-size: 35px 50px;
 }
 .down {
     margin: 0;
     background: url("img/down.svg") no-repeat;
+    background-color: #8CBDF9;
     background-size: 35px 50px;
 }
 .left {
     margin: 0;
     margin-right: 5px;
     background: url("img/left.svg") no-repeat;
+    background-color: #8CBDF9;
     background-size: 50px 35px;
 }
 .right {
     margin: 0;
     background: url("img/right.svg") no-repeat;
+    background-color: #8CBDF9;
     background-size: 50px 35px;
 }
 .button-row button {
     background-position: center;
     width: 30px;
     height: 50px;
-    border-radius: 10px/50px;   
-    outline: none;
 }
 .button-column button, .item-title button {
     background-position: center;
     width: 50px;
     height: 30px;
-    border-radius: 10px/50px;
-    outline: none;
 }
 table {
     background-color: #D8E7F9;
@@ -218,10 +218,6 @@ td {
     text-overflow: ellipsis;
     font-family: 'Baloo Paaji 2', cursive;
     font-weight: bold;
-    background-color: #81D4EC;
-    background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
-                    linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
-    border-radius: 10px/50px;
 }
 .definition table {
     background: 
@@ -300,10 +296,6 @@ td {
     text-overflow: ellipsis;
     font-family: 'Baloo Paaji 2', cursive;
     font-weight: bold;
-    background-color: #81D4EC;
-    background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
-                    linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
-    border-radius: 10px/50px;
 }
 
 
@@ -394,25 +386,24 @@ input:focus, input:hover{
 .question:focus, .question:hover {
     border: 2px solid #100873;
 }
-.buttons-word button, .buttons-autorization button, .save button {
+button {
     outline: none;
-}
-
-@media (hover: hover) { 
-    .buttons-word button:hover, .buttons-autorization button:hover, .save button:hover {
-        transform: scale(1.05);
-        background: transparent;
-        border: 2px solid #100873;
-    }
-  }
-
-.buttons-word button:active, .buttons-autorization button:active, .save button:active {
-    background-color: #81D4EC;
-    background-image: linear-gradient(150deg, #1D59A0 32%, transparent 32%), 
-                    linear-gradient(178deg, #8CBDF9 62%, transparent 62%);
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #100873;
     border: none;
+    border-radius: 50px;
+    background-color: #8CBDF9;
+}
+button:hover {
+    transform: scale(1.05);
+    background-color: transparent;
+    border: 2px solid #8CBDF9;
+    color: #8CBDF9;
+}
+button:focus {
+    background-color: #8CBDF9;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #8CBDF9;
+    border: none;
+    color: black;
 }
 
 
