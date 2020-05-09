@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <script type="module" src="index.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+        <title>Создай свой кроссворд!</title>
+    </head>
+
+    <body>       
+        <header>
+            <div class="header-container">
+                <div class="logo">
+                    <img src="img/logo.png" width="60px" height="60px" alt="">
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+        </main>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+              apiKey: "AIzaSyCnEkremF54y7HOXkqzMN9h4iJxh_5NNow",
+              authDomain: "crosswordconstructor-7c68b.firebaseapp.com",
+              databaseURL: "https://crosswordconstructor-7c68b.firebaseio.com",
+              projectId: "crosswordconstructor-7c68b"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+            db.settings({timestampsInSnapshots: true});
+          </script>
+
+        
+    </body>
+
+</html>
