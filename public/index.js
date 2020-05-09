@@ -1,14 +1,19 @@
-import elements from './views/base.js';
 import Registration from './views/register.js';
 import Autorization from './views/autorization.js';
-import Constructor from './constructor.js';
+import Constructor from './views/constructor.js';
+import Solver from './views/solver.js';
+import Portfolio from './views/portfolio.js';
 
+import Navbar from './views/navBar.js';
 import Utils from './services/Utils.js';
+
 
 const routes = {
     '/': Autorization,
     '/register': Registration,
-    '/construct': Constructor
+    '/construct': Constructor,
+    '/solve': Solver,
+    '/portf': Portfolio
 };
 
 
@@ -18,9 +23,6 @@ const router = async () => {
     const header = null || document.querySelector('header');
     const content = null || document.querySelector('main');
 
-    // Render the Header and footer of the page
-    //header.innerHTML = await Navbar.render();
-    //await Navbar.after_render();
 
     // Get the parsed URl from the addressbar
     let request = Utils.parseRequestURL();
@@ -31,7 +33,25 @@ const router = async () => {
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
     let page = routes[parsedURL] ? routes[parsedURL] : Error404;
     content.innerHTML = await page.render();
-    await page.after_render();
+    await page.afterRender();
+
+    // Render the Header of the page
+    if(request.resource == '' || request.resource == 'register') {
+        header.innerHTML = await Navbar.render([]);
+    } else if(request.resource == 'construct') {
+        header.innerHTML = await Navbar.render([{link: '#/portf', title: 'Портфолио'},
+                                                {link: '#/solve', title: 'Решить'},
+                                                {link: '#/', title: 'Выйти'}]);
+    } else if(request.resource == 'portf') {
+        header.innerHTML = await Navbar.render([{link: '#/construct', title: 'Создать'},
+                                                {link: '#/solve', title: 'Решить'},
+                                                {link: '#/', title: 'Выйти'}]);
+    } else if(request.resource == 'solve') {
+        header.innerHTML = await Navbar.render([{link: '#/portf', title: 'Портфолио'},
+                                                {link: '#/construct', title: 'Создать'},
+                                                {link: '#/', title: 'Выйти'}]);
+    }
+    await Navbar.afterRender();
 
 }
 

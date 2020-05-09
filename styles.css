@@ -278,7 +278,7 @@ td {
     height: 30px;
     font-size: 25px;
     color: #100873;
-    background: #D8E7F9 ;
+    background: #D8E7F9;
     outline: none;
     border: none;
     border-bottom: 2px solid #8CBDF9;
@@ -382,9 +382,11 @@ td {
 
 input:focus, input:hover{
     border-bottom: 2px solid #100873;
+    background: #D8E7F9;
 }
 .question:focus, .question:hover {
     border: 2px solid #100873;
+    background: #D8E7F9;
 }
 button {
     outline: none;

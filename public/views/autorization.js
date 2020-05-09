@@ -17,12 +17,12 @@ let Autorization = {
         `;
     },
     
-    after_render: async () => {
+    afterRender: async () => {
         const btnRegistration = document.querySelector('#registration');
         const btnLogIn = document.querySelector('#log-in');
         const authForm = document.querySelector('#autorization');
         const main = document.querySelector('main');
-        let isSucs = true, isPress = false;
+        let isSucs = true;
 
 
         const goTo = async (e) => {
@@ -31,10 +31,12 @@ let Autorization = {
             Registration.after_render();
         }
 
-        btnRegistration.addEventListener('click', e => goTo(e));
+        btnRegistration.addEventListener('click', e => {
+            e.preventDefault();
+            window.location.hash = '/register';
+        });
 
         btnLogIn.addEventListener('click', e => {
-            isPress = true;
             e.preventDefault();
             const email = authForm['login'].value;
             const password = authForm['password'].value;
@@ -42,10 +44,11 @@ let Autorization = {
                 alert(e.message);
                 isSucs = false;
             })
-            if (isSucs && isPress) {
+            if (isSucs) {
                 auth.onAuthStateChanged(firebaseUser => {
                     if(firebaseUser){
                       alert(`Пользователь ${firebaseUser.email } успешно авторизовался!`);
+                      window.location.hash = '/construct';
                     }
                   });
             }

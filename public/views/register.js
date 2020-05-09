@@ -13,7 +13,7 @@ let Registration = {
         `;
     },
     
-    after_render: async () => {
+    afterRender: async () => {
         window.location.hash = '/register';
         const btnReg = document.querySelector('#registr');
         const regForm = document.querySelector('#registrationForm');
@@ -39,8 +39,9 @@ let Registration = {
                 auth.onAuthStateChanged(firebaseUser => {
                     if(firebaseUser){
                       alert(`Пользователь ${firebaseUser.email } успешно зарегистрирован!`);
+                      window.location.hash = '/construct';
                     }
-                  });
+                });
             }
         });
 
