@@ -4,8 +4,10 @@ import Constructor from './views/constructor.js';
 import Solver from './views/solver.js';
 import Portfolio from './views/portfolio.js';
 
+import Utils from './services/utils.js';
+
 import Navbar from './views/navBar.js';
-import Utils from './services/Utils.js';
+
 
 
 const routes = {
