@@ -163,22 +163,34 @@ let Constructor = {
 
         tbody.addEventListener('click', e => {
             Constructor.isNoTouch = false;
+            let del = false, wrong = false;
             if(!Constructor.isNoTouch) {
                 const toSelect = e.target.id.split('-').map(e => Number(e));
-                if(Constructor.selectedTD < 2) {
+                if(Constructor.selectedTD.length < 1) {
                     Constructor.selectedTD.push(toSelect);
                 } else if (toSelect[0] == Constructor.selectedTD[0][0] && (toSelect[1] == Constructor.selectedTD[0][1] - 1
                     || toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1][1] + 1)) {
-                        Constructor.selectedTD.push(toSelect);
-                        Constructor.selectedTD.sort((a, b) => a[1] > b[1] ? 1 : -1);
+                    Constructor.selectedTD.push(toSelect);
+                    Constructor.selectedTD.sort((a, b) => a[1] > b[1] ? 1 : -1);
                 } else if(toSelect[1] == Constructor.selectedTD[0][1] && (toSelect[0] == Constructor.selectedTD[0][0] - 1
                         || toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1][0] + 1)) {
-                        Constructor.selectedTD.push(toSelect);
-                        Constructor.selectedTD.sort((a, b) => a[0] > b[0] ? 1 : -1);
-                } else {
+                    Constructor.selectedTD.push(toSelect);
+                    Constructor.selectedTD.sort((a, b) => a[0] > b[0] ? 1 : -1);
+                } else if((toSelect[0] == Constructor.selectedTD[0][0] && toSelect[1] == Constructor.selectedTD[0][1]) ||
+                    (toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1][0] &&
+                    toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1][1])) {
                     Constructor.selectedTD.splice(Constructor.selectedTD.indexOf(toSelect), 1);
                     document.getElementById(e.target.id).classList.remove('selected');
+                } else {
+                    document.getElementById(e.target.id).classList.remove('selected');
                 }
+                
+                if(Constructor.selectedTD.length > 1) {
+                    Constructor.selectedTD.forEach(el => {
+                        document.getElementById(el[0] + '-' + el[1]).classList.add('selected');
+                    });
+                }
+
                 console.log(Constructor.selectedTD);
 
                 const instr = document.getElementById('instructions');
