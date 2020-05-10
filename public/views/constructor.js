@@ -66,24 +66,33 @@ let Constructor = {
     },
 
     renderDef: (len) => {
-        let markup = `
-            <p class="my-word">Ваше слово:</p>
-            <table class="word">
-                <tr>
-                    ${Constructor.renderTDDif().repeat(len)}
-                </tr>
-            </table>
-            <p class="my-question">Ваш вопрос:</p>
-            <textarea class="question"></textarea>
-            <div class="buttons-word">
-                <button class="save-word">Сохранить</button>
-                <button class="delete-word">Удалить</button>
-            </div>
-        `
-        return markup;
+        let markup = ``;
+        Constructor.selectedTD.forEach(el => {
+            markup += el.value == '&nbsp;' ? Constructor.renderTDDifVal() : Constructor.renderTDDif(el.value);
+        });
+        return `
+        <p class="my-word">Ваше слово:</p>
+        <table class="word">
+            <tr>
+                ${markup}
+            </tr>
+        </table>
+        <p class="my-question">Ваш вопрос:</p>
+        <textarea class="question"></textarea>
+        <div class="buttons-word">
+            <button class="save-word">Сохранить</button>
+            <button class="delete-word">Отменить</button>
+        </div>
+    `;
     },
 
-    renderTDDif: () => {
+    renderTDDif: (a) => {
+        return `
+        <td><input type="text" maxlength="1" value="${a}" readonly></td>
+        `
+    },
+
+    renderTDDifVal: () => {
         return `
         <td><input type="text" maxlength="1"></td>
         `
@@ -101,6 +110,7 @@ let Constructor = {
         const btnLeft = document.querySelector('.left');
         const btnRight = document.querySelector('.right');
         const tbody = document.querySelector('tbody');
+        const btnCrosswSave = document.querySelector('.save button');
 
         btnUp.addEventListener('click', e => {
             if(Constructor.lenTR > 7) {
@@ -167,19 +177,19 @@ let Constructor = {
             if(!Constructor.isNoTouch) {
                 const toSelect = e.target.id.split('-').map(e => Number(e));
                 if(Constructor.selectedTD.length < 1) {
-                    Constructor.selectedTD.push(toSelect);
-                } else if (toSelect[0] == Constructor.selectedTD[0][0] && (toSelect[1] == Constructor.selectedTD[0][1] - 1
-                    || toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1][1] + 1)) {
-                    Constructor.selectedTD.push(toSelect);
-                    Constructor.selectedTD.sort((a, b) => a[1] > b[1] ? 1 : -1);
-                } else if(toSelect[1] == Constructor.selectedTD[0][1] && (toSelect[0] == Constructor.selectedTD[0][0] - 1
-                        || toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1][0] + 1)) {
-                    Constructor.selectedTD.push(toSelect);
-                    Constructor.selectedTD.sort((a, b) => a[0] > b[0] ? 1 : -1);
-                } else if((toSelect[0] == Constructor.selectedTD[0][0] && toSelect[1] == Constructor.selectedTD[0][1]) ||
-                    (toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1][0] &&
-                    toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1][1])) {
-                    Constructor.selectedTD.splice(Constructor.selectedTD.indexOf(toSelect), 1);
+                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                } else if (toSelect[0] == Constructor.selectedTD[0].toSelect[0] && (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1
+                    || toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1] + 1)) {
+                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                    Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
+                } else if(toSelect[1] == Constructor.selectedTD[0].toSelect[1] && (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1
+                        || toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] + 1)) {
+                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                    Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
+                } else if((toSelect[0] == Constructor.selectedTD[0].toSelect[0] && toSelect[1] == Constructor.selectedTD[0].toSelect[1]) ||
+                    (toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] &&
+                    toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1])) {
+                    Constructor.selectedTD.splice(Constructor.selectedTD.indexOf({toSelect: toSelect, value: e.target.innerHTML}), 1);
                     document.getElementById(e.target.id).classList.remove('selected');
                 } else {
                     document.getElementById(e.target.id).classList.remove('selected');
@@ -187,7 +197,7 @@ let Constructor = {
                 
                 if(Constructor.selectedTD.length > 1) {
                     Constructor.selectedTD.forEach(el => {
-                        document.getElementById(el[0] + '-' + el[1]).classList.add('selected');
+                        document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.add('selected');
                     });
                 }
 
@@ -206,9 +216,30 @@ let Constructor = {
                 }
 
                 Constructor.listenersForWord();
+                console.log(Constructor.selectedTD);
                 
             }
         });
+
+        btnCrosswSave.addEventListener('click', e => {
+            let id = document.querySelector('.save input').value;
+            if(id && Constructor.wordQuestion.length) {
+                const allID = [];
+                db.ref('crosswords/' + id).on('value', function(snapshot) {
+                    allID.push(snapshot.val());
+                    if(allID[0] == null) {
+                        db.ref('crosswords/' + id).set({
+                            words: Constructor.wordQuestion
+                        });
+                        window.location.hash = '/portf';
+                    } else {
+                        alert("Кроссворд с таким id уже существует!");
+                    }
+                });
+            } else {
+                alert("Введите id!!");
+            }
+        })
 
         
     },
@@ -222,20 +253,19 @@ let Constructor = {
             let word = '';
             document.querySelectorAll('.word input').forEach(el => word += el.value);
             let question = document.querySelector('.question').value;
-            let isVertical = Constructor.selectedTD[0][0] != Constructor.selectedTD[Constructor.selectedTD.length - 1][0];
+            let isVertical = Constructor.selectedTD[0].toSelect[0] != Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0];
             if (word.length == Constructor.selectedTD.length) {
-                console.log("Сохраняем");
                 let i = 0;
                 Constructor.selectedTD.forEach(el => {
-                    document.getElementById(el[0] + '-' + el[1]).classList.remove('selected');
-                    document.getElementById(el[0] + '-' + el[1]).innerHTML = word[i];
+                    document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.remove('selected');
+                    document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).innerHTML = word[i];
                     i++;
                 });
                 document.getElementById('definition').hidden = true;
                 let deleteFlag = false;
                 let elemToDel = {};
                 Constructor.wordQuestion.forEach(el => {
-                    if(el.firstLetter[0] == Constructor.selectedTD[0][0] && el.firstLetter[1] == Constructor.selectedTD[0][1]
+                    if(el.firstLetter[0] == Constructor.selectedTD[0].toSelect[0] && el.firstLetter[1] == Constructor.selectedTD[0].toSelect[1]
                          && el.isVertical == isVertical) {
                         deleteFlag = true;
                         elemToDel = el;
@@ -244,15 +274,18 @@ let Constructor = {
                 if(deleteFlag) {
                     Constructor.wordQuestion.splice(Constructor.wordQuestion.indexOf(elemToDel), 1);
                 }
-                Constructor.wordQuestion.push({word: word, question: question, firstLetter: Constructor.selectedTD[0],
+                Constructor.wordQuestion.push({word: word, question: question, firstLetter: Constructor.selectedTD[0].toSelect,
                     isVertical: isVertical});
                 Constructor.selectedTD = [];
             }
-            console.log(Constructor.wordQuestion);
         });
         
         btnDeleteWord.addEventListener('click', e => {
-            
+            Constructor.selectedTD.forEach(el => {
+                document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.remove('selected');
+            });
+            document.getElementById('definition').hidden = true;
+            Constructor.selectedTD = [];
         });
     }
 };
