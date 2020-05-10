@@ -85,7 +85,7 @@ let Constructor = {
 
     renderTDDif: () => {
         return `
-        <td>&nbsp;</td>
+        <td><input type="text" maxlength="1"></td>
         `
     },
 
@@ -93,6 +93,7 @@ let Constructor = {
     lenTR: 10,  //строки
     isNoTouch: true,
     selectedTD: [],
+    wordQuestion: [],
 
     afterRender: async () => {
         const btnUp = document.querySelector('.up');
@@ -163,7 +164,6 @@ let Constructor = {
 
         tbody.addEventListener('click', e => {
             Constructor.isNoTouch = false;
-            let del = false, wrong = false;
             if(!Constructor.isNoTouch) {
                 const toSelect = e.target.id.split('-').map(e => Number(e));
                 if(Constructor.selectedTD.length < 1) {
@@ -191,8 +191,6 @@ let Constructor = {
                     });
                 }
 
-                console.log(Constructor.selectedTD);
-
                 const instr = document.getElementById('instructions');
                 let def = document.createElement('div');
                 def.setAttribute('class', "definition");
@@ -206,7 +204,55 @@ let Constructor = {
                 } else {
                     document.getElementById('definition').replaceWith(def);
                 }
+
+                Constructor.listenersForWord();
+                
             }
+        });
+
+        
+    },
+
+    listenersForWord: () => {
+        const btnSaveWord = document.querySelector('.save-word');
+        const btnDeleteWord = document.querySelector('.delete-word');
+        const wordTR = document.querySelector('.word tr');
+
+        btnSaveWord.addEventListener('click', e => {   
+            let word = '';
+            document.querySelectorAll('.word input').forEach(el => word += el.value);
+            let question = document.querySelector('.question').value;
+            let isVertical = Constructor.selectedTD[0][0] != Constructor.selectedTD[Constructor.selectedTD.length - 1][0];
+            if (word.length == Constructor.selectedTD.length) {
+                console.log("Сохраняем");
+                let i = 0;
+                Constructor.selectedTD.forEach(el => {
+                    document.getElementById(el[0] + '-' + el[1]).classList.remove('selected');
+                    document.getElementById(el[0] + '-' + el[1]).innerHTML = word[i];
+                    i++;
+                });
+                document.getElementById('definition').hidden = true;
+                let deleteFlag = false;
+                let elemToDel = {};
+                Constructor.wordQuestion.forEach(el => {
+                    if(el.firstLetter[0] == Constructor.selectedTD[0][0] && el.firstLetter[1] == Constructor.selectedTD[0][1]
+                         && el.isVertical == isVertical) {
+                        deleteFlag = true;
+                        elemToDel = el;
+                    }
+                });
+                if(deleteFlag) {
+                    Constructor.wordQuestion.splice(Constructor.wordQuestion.indexOf(elemToDel), 1);
+                }
+                Constructor.wordQuestion.push({word: word, question: question, firstLetter: Constructor.selectedTD[0],
+                    isVertical: isVertical});
+                Constructor.selectedTD = [];
+            }
+            console.log(Constructor.wordQuestion);
+        });
+        
+        btnDeleteWord.addEventListener('click', e => {
+            
         });
     }
 };
