@@ -223,19 +223,25 @@ let Constructor = {
 
         btnCrosswSave.addEventListener('click', e => {
             let id = document.querySelector('.save input').value;
-            if(id && Constructor.wordQuestion.length) {
-                const allID = [];
-                db.ref('crosswords/' + id).on('value', function(snapshot) {
-                    allID.push(snapshot.val());
-                    if(allID[0] == null) {
-                        db.ref('crosswords/' + id).set({
-                            words: Constructor.wordQuestion
-                        });
-                        window.location.hash = '/portf';
-                    } else {
-                        alert("Кроссворд с таким id уже существует!");
-                    }
-                });
+            if(id) {
+                if(Constructor.wordQuestion.length) {
+                    const allID = [];
+                    db.ref('crosswords/' + id).on('value', function(snapshot) {
+                        allID.push(snapshot.val());
+                        if(allID[0] == null) {
+                            db.ref('crosswords/' + id).set({
+                                words: Constructor.wordQuestion,
+                                lenTD: Constructor.lenTD,
+                                lenTR: Constructor.lenTR
+                            });
+                            window.location.hash = '/portf';
+                        } else {
+                            alert("Кроссворд с таким id уже существует!");
+                        }
+                    });
+                } else {
+                    alert("Кроссворд не может быть пустым!");
+                }
             } else {
                 alert("Введите id!!");
             }
@@ -262,21 +268,29 @@ let Constructor = {
                     i++;
                 });
                 document.getElementById('definition').hidden = true;
-                let deleteFlag = false;
+                let deleteFlag = false, isSmaller = false;
                 let elemToDel = {};
                 Constructor.wordQuestion.forEach(el => {
-                    if(el.firstLetter[0] == Constructor.selectedTD[0].toSelect[0] && el.firstLetter[1] == Constructor.selectedTD[0].toSelect[1]
+                    if(el.firstLetter[0] == Constructor.selectedTD[0].toSelect[0] &&el.firstLetter[1] == Constructor.selectedTD[0].toSelect[1]
                          && el.isVertical == isVertical) {
                         deleteFlag = true;
                         elemToDel = el;
+                        if (el.word.length > Constructor.selectedTD.length) {
+                            isSmaller = true;
+                        }
                     }
                 });
-                if(deleteFlag) {
-                    Constructor.wordQuestion.splice(Constructor.wordQuestion.indexOf(elemToDel), 1);
+                if(!isSmaller) {
+                    if(deleteFlag) {
+                        Constructor.wordQuestion.splice(Constructor.wordQuestion.indexOf(elemToDel), 1);
+                    }
+                    Constructor.wordQuestion.push({word: word, question: question, firstLetter: Constructor.selectedTD[0].toSelect,
+                        isVertical: isVertical});
+                    Constructor.selectedTD = [];
+                } else {
+                    alert('Вопрос для данного слова уже определен!');
                 }
-                Constructor.wordQuestion.push({word: word, question: question, firstLetter: Constructor.selectedTD[0].toSelect,
-                    isVertical: isVertical});
-                Constructor.selectedTD = [];
+                
             }
         });
         

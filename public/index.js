@@ -65,5 +65,4 @@ window.addEventListener('load', () => {
     window.location.hash = '/';
     auth.signOut();
     router();
-    auth.signOut();
 });

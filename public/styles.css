@@ -172,15 +172,15 @@ td {
     text-align: center;
 }
 td > input {
-    width: 30px;
+    width: 27px;
     height: 30px;
     color: #100873;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
 }
-.selected {
-    background-color: red;
+.not-empty, .not-empty > input, .selected {
+    background: #dfccc8;
 }
 .instructions {
     grid-column: 7 / 9;
@@ -196,7 +196,7 @@ td > input {
     font-size: 12px;
 }
 .definition {
-    grid-column: 7 / 9;
+    grid-column: 6 / 10;
     margin-left: 20px;
     margin-right: 20px;
     border: 3px dashed #8CBDF9;
