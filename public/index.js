@@ -3,6 +3,7 @@ import Autorization from './views/autorization.js';
 import Constructor from './views/constructor.js';
 import Solver from './views/solver.js';
 import Portfolio from './views/portfolio.js';
+import Error404 from './views/error404.js'
 
 import Utils from './services/utils.js';
 
@@ -21,6 +22,11 @@ const routes = {
 
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
+
+    const all = [];
+    db.ref('crosswords').on('value', function(snapshot) {
+        all.push(snapshot.val());
+    });
     // Lazy load view element:
     const header = null || document.querySelector('header');
     const content = null || document.querySelector('main');
@@ -34,7 +40,11 @@ const router = async () => {
     // Get the page from our hash of supported routes.
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
     let page = routes[parsedURL] ? routes[parsedURL] : Error404;
-    content.innerHTML = await page.render();
+    if(page == Portfolio) {
+        content.innerHTML = await page.render(all);
+    } else {
+        content.innerHTML = await page.render(); 
+    }
     await page.afterRender();
 
     // Render the Header of the page

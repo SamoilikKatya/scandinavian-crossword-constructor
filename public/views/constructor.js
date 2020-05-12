@@ -216,7 +216,6 @@ let Constructor = {
                 }
 
                 Constructor.listenersForWord();
-                console.log(Constructor.selectedTD);
                 
             }
         });
@@ -232,7 +231,9 @@ let Constructor = {
                             db.ref('crosswords/' + id).set({
                                 words: Constructor.wordQuestion,
                                 lenTD: Constructor.lenTD,
-                                lenTR: Constructor.lenTR
+                                lenTR: Constructor.lenTR,
+                                views: 0,
+                                procents: []
                             });
                             window.location.hash = '/portf';
                         } else {

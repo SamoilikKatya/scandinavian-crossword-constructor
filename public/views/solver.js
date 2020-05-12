@@ -175,10 +175,13 @@ let Solver = {
         btnLoad.addEventListener('click', e => {
             const id = idInput.value;
             if(id) {
+                Solver.clearAll();
                 db.ref('crosswords/' + id).on('value', function(snapshot) {
                     if(snapshot.val() == null) {
                         alert('Кроссворда с таким id не существует!');
                     } else {
+                        Solver.views = snapshot.val().views;
+                        Solver.procents = snapshot.val().procents ? snapshot.val().procents : [];
                         Solver.words = snapshot.val().words;
                         Solver.lenTR = snapshot.val().lenTR;
                         Solver.lenTD = snapshot.val().lenTD;
@@ -194,26 +197,29 @@ let Solver = {
                             if(word.isVertical){
                                 let count = 0;
                                 for(let i = word.firstLetter[0]; i < word.firstLetter[0] + word.word.length; i++) {
+                                    if(!Solver.crossword[i][word.firstLetter[1]].letter) {
+                                        Solver.amountLetters++;
+                                    }
                                     Solver.crossword[i][word.firstLetter[1]] = {
                                         letter: word.word[count],
                                         question: word.question
                                     }
                                     count++;
-                                    Solver.amountLetters++;
                                 }
                             } else {
                                 let count = 0;
                                 for(let i = word.firstLetter[1]; i < word.firstLetter[1] + word.word.length; i++) {
+                                    if(!Solver.crossword[word.firstLetter[0]][i].letter) {
+                                        Solver.amountLetters++;
+                                    }
                                     Solver.crossword[word.firstLetter[0]][i] = {
                                         letter: word.word[count],
                                         question: word.question
                                     }
                                     count++;
-                                    Solver.amountLetters++;
                                 }
                             }
                         }
-                        console.log(Solver.crossword);
                         let newTable = document.createElement('div');
                         newTable.setAttribute('class', "crossword-solver");
                         newTable.setAttribute('id', "crossword-solver");
@@ -240,12 +246,16 @@ let Solver = {
                     }
                 }
             }
+            console.log(notEmpty, Solver.amountLetters);
             if(Solver.crossword.length == 0) {
                 alert("Кроссворд не загружен!");
             } else if(notEmpty < Solver.amountLetters) {
                 alert("Для начала заполните все клеточки!");
             } else {
                 alert(`Правильность выполнения: ${(rightLetters / Solver.amountLetters * 100).toFixed(3)}%`);
+                Solver.procents.push(Number((rightLetters / Solver.amountLetters * 100).toFixed(3)));
+                db.ref('crosswords/' + idInput.value).update({procents: Solver.procents, views: Solver.views + 1});
+                window.location.hash = '/portf';
             }
         });
     },
@@ -272,12 +282,23 @@ let Solver = {
             l.addEventListener('click', eventListener);
         });
     },
+    clearAll: () => {
+        Solver.lenTR = 0;
+        Solver.lenTD = 0;
+        Solver.words = [];
+        Solver.crossword = [];
+        Solver.amountLetters = 0;
+        Solver.views = 0;
+        Solver.procents = [];
+    },
 
     lenTR: 0,
     lenTD: 0,
     words: [],
     crossword: [],
-    amountLetters: 0
+    amountLetters: 0, 
+    views: 0,
+    procents: []
 };
 
 export default Solver;
