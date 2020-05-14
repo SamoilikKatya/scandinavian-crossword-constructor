@@ -22,11 +22,7 @@ const routes = {
 
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
-
     const all = [];
-    db.ref('crosswords').on('value', function(snapshot) {
-        all.push(snapshot.val());
-    });
     // Lazy load view element:
     const header = null || document.querySelector('header');
     const content = null || document.querySelector('main');
@@ -41,7 +37,11 @@ const router = async () => {
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
     let page = routes[parsedURL] ? routes[parsedURL] : Error404;
     if(page == Portfolio) {
-        content.innerHTML = await page.render(all);
+        db.ref('crosswords').on('value', function(snapshot) {
+            all.push(snapshot.val());
+            content.innerHTML = page.render(all);
+        });
+        
     } else {
         content.innerHTML = await page.render(); 
     }
@@ -72,7 +72,15 @@ window.addEventListener('hashchange', router);
 
 // Listen on page load:
 window.addEventListener('load', () => {
-    window.location.hash = '/';
-    auth.signOut();
-    router();
+    auth.onAuthStateChanged(firebaseUser => {
+        console.log(firebaseUser);
+        if(firebaseUser){
+            window.location.hash = '/portf';
+        } else {
+            window.location.hash = '/';
+        }
+        router();
+    });
+
+    
 });

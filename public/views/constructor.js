@@ -103,6 +103,7 @@ let Constructor = {
     isNoTouch: true,
     selectedTD: [],
     wordQuestion: [],
+    isVertical: false,
 
     afterRender: async () => {
         const btnUp = document.querySelector('.up');
@@ -114,18 +115,18 @@ let Constructor = {
 
         btnUp.addEventListener('click', e => {
             if(Constructor.lenTR > 7) {
-                let flag = true;
+                let isCanEdit = true;
                 const row = tbody.lastElementChild;
                 for(let i=0; i< row.children.length; i++) {
                     if(row.children[i].getAttribute('class') == 'selected') {
-                        flag = false;
+                        isCanEdit = false;
                     }
                 }
-                if(flag) {
+                if(isCanEdit) {
                     Constructor.lenTR -= 1;
                     tbody.removeChild(row);
                 }
-                flag = true;
+                isCanEdit = true;
                 
             }
         });
@@ -142,17 +143,17 @@ let Constructor = {
         btnLeft.addEventListener('click', e => {
             if(Constructor.lenTD > 7) {
                 let rows = document.querySelectorAll('.crossword-table tr');
-                let flag = true;
+                let isCanEdit = true;
                 rows.forEach(r => {
                     if(r.lastElementChild.getAttribute('class') == 'selected') {
-                        flag = false;
+                        isCanEdit = false;
                     }
                 });
-                if(flag) {
+                if(isCanEdit) {
                     Constructor.lenTD -= 1;
                     rows.forEach(r => r.removeChild(r.lastElementChild));
                 }
-                flag = true;
+                isCanEdit = true;
             }
         });
 
@@ -165,7 +166,7 @@ let Constructor = {
                     const toAppend = document.createElement('td');
                     toAppend.innerHTML = '&nbsp;';
                     toAppend.id = i + "-" + (Constructor.lenTD - 1);
-                    toAppend.setAttribute("onclick", "event.target.classList.add('selected')");
+                    toAppend.addEventListener("click", event => event.target.classList.add('selected'));
                     i++;
                     r.appendChild(toAppend);
                 });
@@ -176,25 +177,39 @@ let Constructor = {
             Constructor.isNoTouch = false;
             if(!Constructor.isNoTouch) {
                 const toSelect = e.target.id.split('-').map(e => Number(e));
-                if(Constructor.selectedTD.length < 1) {
+
+
+                if(Constructor.selectedTD.length == 0) {
                     Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
-                } else if (toSelect[0] == Constructor.selectedTD[0].toSelect[0] && (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1
-                    || toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1] + 1)) {
-                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
-                    Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
-                } else if(toSelect[1] == Constructor.selectedTD[0].toSelect[1] && (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1
-                        || toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] + 1)) {
-                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
-                    Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
+                } else if (Constructor.selectedTD.length == 1 && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
+                    (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1 || toSelect[1] == Constructor.selectedTD[0].toSelect[1] + 1)) {
+                        Constructor.isVertical = false;
+                        Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                        Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
+                } else if (Constructor.selectedTD.length == 1 && toSelect[1] == Constructor.selectedTD[0].toSelect[1] &&
+                    (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1 || toSelect[0] == Constructor.selectedTD[0].toSelect[0] + 1)) {
+                        Constructor.isVertical = true;
+                        Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                        Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
+                } else if(!Constructor.isVertical && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
+                    (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1 ||
+                    toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1] + 1)) {
+                            Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                            Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
+                } else if(Constructor.isVertical && toSelect[1] == Constructor.selectedTD[0].toSelect[1] &&
+                    (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1 ||
+                    toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] + 1)) {
+                            Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                            Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
                 } else if((toSelect[0] == Constructor.selectedTD[0].toSelect[0] && toSelect[1] == Constructor.selectedTD[0].toSelect[1]) ||
                     (toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] &&
                     toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1])) {
-                    Constructor.selectedTD.splice(Constructor.selectedTD.indexOf({toSelect: toSelect, value: e.target.innerHTML}), 1);
-                    document.getElementById(e.target.id).classList.remove('selected');
+                        Constructor.selectedTD.splice(Constructor.selectedTD.indexOf({toSelect: toSelect, value: e.target.innerHTML}), 1);
+                        document.getElementById(e.target.id).classList.remove('selected');
                 } else {
                     document.getElementById(e.target.id).classList.remove('selected');
                 }
-                
+
                 if(Constructor.selectedTD.length > 1) {
                     Constructor.selectedTD.forEach(el => {
                         document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.add('selected');

@@ -21,12 +21,18 @@ let Navbar = {
 
     renderLink: (link, title) => {
         return `
-            <li><a href="${link}">${title}</a></li>
+            <li><a href="${link}" id="${title}">${title}</a></li>
         `
     },
 
     afterRender: async () => {
+        const btnLogOut = document.getElementById('Выйти');
 
+        if(btnLogOut) {
+            btnLogOut.addEventListener('click', () => {
+                auth.signOut();
+            })
+        }
     }
 };
 

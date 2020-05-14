@@ -11,15 +11,13 @@ let Autorization = {
                 <input type="password"id="password" placeholder="Пароль">
                 <div class="buttons-autorization">
                     <button id="log-in">Вход</button>
-                    <button id="registration">Регистрация</button>
+                    <a id="registration" href="#/register">Регистрация</a>
                 </div>
         </form>
         `;
     },
     
     afterRender: async () => {
-        const btnRegistration = document.querySelector('#registration');
-        const btnLogIn = document.querySelector('#log-in');
         const authForm = document.querySelector('#autorization');
         const main = document.querySelector('main');
         let isSucs = true;
@@ -31,27 +29,20 @@ let Autorization = {
             Registration.after_render();
         }
 
-        btnRegistration.addEventListener('click', e => {
-            e.preventDefault();
-            window.location.hash = '/register';
-        });
-
-        btnLogIn.addEventListener('click', e => {
+        authForm.addEventListener('submit', e => {
             e.preventDefault();
             const email = authForm['login'].value;
             const password = authForm['password'].value;
-            auth.signInWithEmailAndPassword(email, password).catch(e => {
-                alert(e.message);
-                isSucs = false;
-            })
-            if (isSucs) {
+            auth.signInWithEmailAndPassword(email, password).then(() => {
                 auth.onAuthStateChanged(firebaseUser => {
                     if(firebaseUser){
-                      alert(`Пользователь ${firebaseUser.email } успешно авторизовался!`);
-                      window.location.hash = '/construct';
+                        alert(`Пользователь ${firebaseUser.email } успешно авторизовался!`);
+                        window.location.hash = '/construct';
                     }
-                  });
-            }
+                });
+            }).catch(e => {
+                alert(e.message);
+            });
         });
 
     }

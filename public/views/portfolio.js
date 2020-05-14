@@ -1,5 +1,5 @@
 let Portfolio = {
-    render: async (all) => {
+    render: (all) => {
         return `
         <div class="crossword-list">${Portfolio.listItems(all)}</div>
         `
