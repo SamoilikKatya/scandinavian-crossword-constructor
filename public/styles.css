@@ -75,11 +75,11 @@ nav {
 .content {
     margin: 20px 5%;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(9, 1fr);
 }
 .crossword {
-    grid-column: 2 / 5;
-    margin: 0 auto;
+    grid-column: 2 / 6;
+    margin: 0;
 }
 .crossword-up {
     display: flex;
@@ -138,7 +138,7 @@ nav {
     width: 50px;
     height: 30px;
 }
-table {
+table, td > input {
     background-color: #D8E7F9;
     border-spacing: 0;
     border-collapse: collapse;
@@ -164,24 +164,39 @@ table, th, td {
     border: 1px solid black;
 }
 td {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     color: #100873;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
 }
+td > input {
+    width: 27px;
+    height: 30px;
+    color: #100873;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.not-empty, .not-empty > input, .selected {
+    background: #dfccc8;
+}
 .instructions {
-    grid-column: 5 / 7;
+    grid-column: 7 / 9;
     padding: 7px;
     margin-left: 20px;
     margin-right: 20px;
     border: 3px dashed #8CBDF9;
     border-radius: 10px/50px; 
     background: #D8E7F9;  
+    height: 300px;
+}
+.instructions p {
+    font-size: 12px;
 }
 .definition {
-    grid-column: 5 / 7;
+    grid-column: 6 / 10;
     margin-left: 20px;
     margin-right: 20px;
     border: 3px dashed #8CBDF9;
@@ -211,13 +226,14 @@ td {
     display: flex;
     justify-content: space-between;
 }
-.buttons-word button, .buttons-autorization button, .save button {
+.buttons-word button, .buttons-autorization button, .save button, #registration {
     height: 30px;
     width: 40%;
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: 'Baloo Paaji 2', cursive;
     font-weight: bold;
+    color: black;
 }
 .definition table {
     background: 
@@ -278,7 +294,7 @@ td {
     height: 30px;
     font-size: 25px;
     color: #100873;
-    background: #D8E7F9 ;
+    background: #D8E7F9;
     outline: none;
     border: none;
     border-bottom: 2px solid #8CBDF9;
@@ -344,7 +360,7 @@ td {
     margin-left: 10px;
     margin-top: 10px;
 }
-.item-title a {
+.item-title img {
     grid-column: 2;
 }
 .item-title img {
@@ -379,18 +395,35 @@ td {
     margin-top: 0;
     grid-column: 2 / 5;
 }
-
-input:focus, input:hover{
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    border: 0;
+    -webkit-text-fill-color: #100873;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
     border-bottom: 2px solid #100873;
+    background: #D8E7F9;
+}
+input:-webkit-autofill {
+    border-bottom: 2px solid #8CBDF9;
+}
+input:focus, input:hover {
+    border-bottom: 2px solid #100873;
+    color: #100873;
+    background: #D8E7F9;
 }
 .question:focus, .question:hover {
     border: 2px solid #100873;
+    color: #100873;
+    background: #D8E7F9;
 }
 button {
     outline: none;
     border: none;
     border-radius: 50px;
     background-color: #8CBDF9;
+    text-align: center;
 }
 button:hover {
     transform: scale(1.05);
@@ -404,6 +437,13 @@ button:focus {
     box-shadow: 0 0 15px #8CBDF9;
     border: none;
     color: black;
+}
+#registration {
+    outline: none;
+    text-align: center;
+}
+#registration:hover {
+    color: #8CBDF9;
 }
 
 
@@ -486,6 +526,11 @@ button:focus {
         width: 90%;
     }
     td {
+        width: 50px;
+        height: 50px;
+        font-size: 23px;
+    }
+    td > input {
         width: 50px;
         height: 50px;
         font-size: 23px;
@@ -579,4 +624,18 @@ button:focus {
         margin-left: 30px;
         padding: 0 5%;
     }
+}
+
+body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+#message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px 16px; border-radius: 3px; }
+#message h3 { color: #888; font-weight: normal; font-size: 16px; margin: 16px 0 12px; }
+#message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+#message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+#message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+#message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+#message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+#load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+@media (max-width: 600px) {
+  body, #message { margin-top: 0; background: white; box-shadow: none; }
+  body { border-top: 16px solid #ffa100; }
 }

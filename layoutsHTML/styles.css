@@ -1,0 +1,584 @@
+body {
+    font-family: 'Baloo Paaji 2', cursive;
+    background-image: url("img/background.jpg"),
+        repeating-linear-gradient(90deg, #d8bbb5, #8CBDF9,  #d8bbb5);
+    background-size: cover;
+    background-blend-mode: overlay;
+    opacity: 0.85;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 30px;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+    display: flex;
+}
+a { 
+    text-decoration: none;
+}
+header {
+    background-image: repeating-linear-gradient(60deg,
+    #e7f0ed 0px, #e7f0ed 15px,
+    #dfccc8 15px, #dfccc8 25px,
+    rgb(166, 204, 250) 25px, rgb(166, 204, 250) 35px,
+    #D8E7F9 35px, #D8E7F9 45px,
+    #ffefd7 45px, #ffefd7 55px),
+        repeating-linear-gradient(-60deg,
+        #e7f0ed 0px, #e7f0ed 15px,
+        #dfccc8 15px, #dfccc8 25px,
+        rgb(166, 204, 250) 25px, rgb(166, 204, 250) 35px,
+        #D8E7F9 35px, #D8E7F9 45px,
+        #ffefd7 45px, #ffefd7 55px);
+    background-blend-mode: multiply;
+}
+.header-container {
+    margin: 0 auto;
+    padding: 5px;
+    padding-right: 0;   
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+}
+.header-container a {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 63px;
+    padding: 20px 6px;
+    border: 3px dashed transparent;
+    border-radius: 10px/50px;
+}
+.header-container a:hover {
+    background: #ffefd7;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px;
+} 
+#menu-checkbox {
+    display: none;
+}
+ul {
+    display: flex;
+}
+nav {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 60px;
+}
+.logo {
+    margin-top: 10px;
+}
+
+.content {
+    margin: 20px 5%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.crossword {
+    grid-column: 2 / 5;
+    margin: 0 auto;
+}
+.crossword-up {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+.crossword-table {
+    margin: 0;
+    grid-row: 1;
+    grid-column: 1;
+}
+.button-row {
+    margin: 0;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.button-column {
+    margin: 10px auto;
+    display: flex;
+    justify-content: flex-start;
+}
+.up {
+    margin: 0;
+    margin-bottom: 5px;
+    background: url("img/up.svg") no-repeat;
+    background-color: #8CBDF9;
+    background-size: 35px 50px;
+}
+.down {
+    margin: 0;
+    background: url("img/down.svg") no-repeat;
+    background-color: #8CBDF9;
+    background-size: 35px 50px;
+}
+.left {
+    margin: 0;
+    margin-right: 5px;
+    background: url("img/left.svg") no-repeat;
+    background-color: #8CBDF9;
+    background-size: 50px 35px;
+}
+.right {
+    margin: 0;
+    background: url("img/right.svg") no-repeat;
+    background-color: #8CBDF9;
+    background-size: 50px 35px;
+}
+.button-row button {
+    background-position: center;
+    width: 30px;
+    height: 50px;
+}
+.button-column button, .item-title button {
+    background-position: center;
+    width: 50px;
+    height: 30px;
+}
+table {
+    background-color: #D8E7F9;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #E8F4F2;
+
+}
+table, th, td {
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+}
+td {
+    width: 40px;
+    height: 40px;
+    color: #100873;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.instructions {
+    grid-column: 5 / 7;
+    padding: 7px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px; 
+    background: #D8E7F9;  
+}
+.definition {
+    grid-column: 5 / 7;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #D8E7F9;
+}
+.definition p, .save p {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.question {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    height: 100px;
+    background: #E9F3FF;
+    color: #100873;
+    resize: none;
+    outline: none;
+    border: 2px solid #8CBDF9
+}
+.buttons-word {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons-word button, .buttons-autorization button, .save button {
+    height: 30px;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Baloo Paaji 2', cursive;
+    font-weight: bold;
+}
+.definition table {
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #E8F4F2;
+}
+.save {
+    grid-column: 2 / 5;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px;  
+    background: #D8E7F9;
+}
+.save input {
+    margin: 5px;
+    height: 20px;
+    font-size: 18px;
+    color: #100873;
+    background: #D8E7F9 ;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #8CBDF9;
+}
+.save button {
+    margin-top: 10px;
+}
+
+
+.autorisation {
+    width: 40%;
+    margin: 100px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px; 
+    background: #D8E7F9;
+}
+.autorisation p {
+    color: #100873;
+    margin: -5px auto;
+    font-weight: bold;
+    font-size: 25px;
+}
+.autorisation input {
+    margin: 5px;
+    height: 30px;
+    font-size: 25px;
+    color: #100873;
+    background: #D8E7F9;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #8CBDF9;
+}
+.buttons-autorization {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.registr {
+    margin: 10px auto;
+    height: 30px;
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Baloo Paaji 2', cursive;
+    font-weight: bold;
+}
+
+
+.crossword-list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    font-size: 16px;
+}
+.crossword-item {
+    width: 25%;
+    height: 120px;
+    margin: 40px;
+    margin-bottom: 0;
+    border: 3px dashed #8CBDF9;
+    border-radius: 10px/50px; 
+    background: #D8E7F9; 
+    overflow: auto;
+    display: grid;
+    grid-auto-rows: 3;
+    grid-auto-columns: 80% 20%;
+}
+.item-title {
+    grid-row: 1;
+    grid-column: 1/3;
+    color:  #100873;
+    font-weight: bold;
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #E8F4F2;
+    display: grid;
+    grid-auto-columns: 80% 20%;
+    width: 100%;
+}
+.item-title h3 {
+    grid-column: 1;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.item-title a {
+    grid-column: 2;
+}
+.item-title img {
+    margin-left: -5px;
+    margin-top: 10px;
+    width: 30px;
+}
+.views {
+    margin-left: 10px;
+    grid-row: 2;
+    grid-column: 1;
+}
+.amount-views {
+    grid-row: 2;
+    grid-column: 2;
+}
+.procent {
+    margin-left: 10px;
+    grid-row: 3;
+    grid-column: 1;
+}
+.amount-procent {
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.definition > .text-question {
+    font-weight: normal;
+}
+.crossword-solver {
+    margin: 10px auto;
+    margin-top: 0;
+    grid-column: 2 / 5;
+}
+
+input:focus, input:hover{
+    border-bottom: 2px solid #100873;
+    background: #D8E7F9;
+}
+.question:focus, .question:hover {
+    border: 2px solid #100873;
+    background: #D8E7F9;
+}
+button {
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    background-color: #8CBDF9;
+}
+button:hover {
+    transform: scale(1.05);
+    background-color: transparent;
+    border: 2px solid #8CBDF9;
+    color: #8CBDF9;
+}
+button:focus {
+    background-color: #8CBDF9;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #8CBDF9;
+    border: none;
+    color: black;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+    .header-container {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        font-size: 23px;
+    }
+    .header-container a {
+        font-size: 23px;
+    }
+    .logo {
+        margin-left: 30px;
+    }
+    .main-menu {
+        display: none;
+    }
+    .main-menu li {
+        width: 100%;
+        display: block;
+        font-size: 23px;
+    }
+    .main-menu a {
+        display: block;
+        padding: 8px;
+    }
+    .toggle-button {
+        text-align: center;
+        display: block;
+        cursor: pointer;
+        color: #000;
+        margin-top: 20px;
+        margin-right: 50px;
+    }
+    .toggle-button:after {
+        content: attr(data-open);
+        display: block;
+        margin-top: 20px;
+    }
+    .main-menu a {
+        background: radial-gradient(#ffefd7 10px,  #D8E7F9 10px);
+        background-size: 20px 20px;
+        border-radius: 10px/50px;
+    }
+
+    #menu-checkbox:checked + nav[role="navigation"] .main-menu {
+        display: block;
+    }
+    #menu-checkbox:checked + nav[role="navigation"] .toggle-button:after {
+        content: attr(data-close);
+    }
+    .header-container a {
+        margin-right: -65px;
+    }
+    .main-menu {
+        position: relative;
+        top: 30px;
+        right: 115px;
+    }
+    .content {
+        display: inline;
+        margin: 0;
+    }
+    .crossword {
+        margin: 0;
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    .instructions, .definition {
+        margin: 0;
+        margin-left: 30px;
+        margin-top: 30px;
+        width: 90%;
+    }
+    td {
+        width: 50px;
+        height: 50px;
+        font-size: 23px;
+    }
+    .buttons-word button, .buttons-autorization button, .save button {
+        height: 50px;
+        font-size: 23px;
+    }
+    .definition p, .save p {
+        font-size: 21px;
+    }
+    .button-row button {
+        width: 45px;
+        height: 75px;
+    }
+    .button-column button {
+        width: 75px;
+        height: 45px;
+    }
+    .up, .down {
+        background-size: 55px 75px;
+    }
+    .left, .right {
+        background-size: 75px 55px;
+    }
+    .save {
+        margin: 0;
+        margin-left: 30px;
+        margin-top: 30px;
+        width: 90%;
+    }
+    .save input {
+        height: 30px;
+        
+    }
+    .save button {
+        margin-top: 10px;
+    }
+
+    .autorisation {
+        width: 60%;
+        margin: 200px auto;
+    }
+    .autorisation p {
+        font-size: 40px;
+    }
+    .autorisation input {
+        margin: 10px 5px;
+        height: 40px;
+        font-size: 32px;
+    }
+    .autorisation button {
+        font-size: 27px;
+    }
+    .registr {
+        height: 50px;
+        font-size: 23px;
+        margin-top: 15px;
+    }
+
+    .crossword-list {
+        font-size: 23px;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .crossword-item {
+        padding-top: 0;
+        width: 35%;
+        height: 200px;
+        margin: 60px;
+        margin-bottom: 0;
+    }
+    .item-title h3 {
+        font-size: 30px;
+        padding: 10px;
+        padding-bottom: 0;
+    }
+    .item-title img {
+        width: 45px;
+        padding: 10px;
+        padding-bottom: 0;
+    }
+    .crossword-item p {
+        padding: 10px;
+        padding-bottom: 0;
+    }
+
+    .crossword-solver {
+        margin: 0;
+        margin-top: 30px;
+        margin-left: 30px;
+        padding: 0 5%;
+    }
+}
