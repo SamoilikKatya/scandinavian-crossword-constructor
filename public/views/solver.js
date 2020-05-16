@@ -149,7 +149,7 @@ let Solver = {
     renderTD: (i, j) => {
         return `
         <td id="${i}-${j}" class="not-empty">
-            <input type="text" maxlength="1">
+            <input type="text" maxlength="1" onkeyup="this.value = this.value.toUpperCase();">
         </td>
         `
     },

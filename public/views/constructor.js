@@ -88,13 +88,13 @@ let Constructor = {
 
     renderTDDif: (a) => {
         return `
-        <td><input type="text" maxlength="1" value="${a}" readonly></td>
+        <td><input type="text" maxlength="1" value="${a.toUpperCase()}" readonly></td>
         `
     },
 
     renderTDDifVal: () => {
         return `
-        <td><input type="text" maxlength="1"></td>
+        <td><input type="text" maxlength="1" onkeyup="this.value = this.value.toUpperCase();"></td>
         `
     },
 
@@ -207,7 +207,11 @@ let Constructor = {
                         Constructor.selectedTD.splice(Constructor.selectedTD.indexOf({toSelect: toSelect, value: e.target.innerHTML}), 1);
                         document.getElementById(e.target.id).classList.remove('selected');
                 } else {
-                    document.getElementById(e.target.id).classList.remove('selected');
+                    Constructor.selectedTD.forEach(el => {
+                        document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.remove('selected');
+                    });
+                    Constructor.selectedTD = [];
+                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
                 }
 
                 if(Constructor.selectedTD.length > 1) {
