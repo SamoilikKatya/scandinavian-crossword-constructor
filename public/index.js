@@ -71,16 +71,13 @@ const router = async () => {
 window.addEventListener('hashchange', router);
 
 // Listen on page load:
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     auth.onAuthStateChanged(firebaseUser => {
-        console.log(firebaseUser);
         if(firebaseUser){
             window.location.hash = '/portf';
         } else {
             window.location.hash = '/';
         }
         router();
-    });
-
-    
+    });    
 });

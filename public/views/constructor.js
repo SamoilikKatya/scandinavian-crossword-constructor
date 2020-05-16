@@ -177,8 +177,6 @@ let Constructor = {
             Constructor.isNoTouch = false;
             if(!Constructor.isNoTouch) {
                 const toSelect = e.target.id.split('-').map(e => Number(e));
-
-
                 if(Constructor.selectedTD.length == 0) {
                     Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
                 } else if (Constructor.selectedTD.length == 1 && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&

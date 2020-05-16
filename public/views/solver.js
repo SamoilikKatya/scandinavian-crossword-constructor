@@ -161,9 +161,13 @@ let Solver = {
     },
 
     renderQuestion: (quest) => {
+        let questions = '';
+        quest.forEach(q => {
+            questions += q + '<br><br>';
+        })
         return `
         <p class="my-question">Вопрос для данного поля:</p>
-        <p class="text-question">${quest}</p>
+        <p class="text-question">${questions}</p>
         `
     },
 
@@ -199,10 +203,13 @@ let Solver = {
                                 for(let i = word.firstLetter[0]; i < word.firstLetter[0] + word.word.length; i++) {
                                     if(!Solver.crossword[i][word.firstLetter[1]].letter) {
                                         Solver.amountLetters++;
-                                    }
-                                    Solver.crossword[i][word.firstLetter[1]] = {
-                                        letter: word.word[count],
-                                        question: word.question
+                                        Solver.crossword[i][word.firstLetter[1]] = {
+                                            letter: word.word[count],
+                                            question: []
+                                        }
+                                        Solver.crossword[i][word.firstLetter[1]].question.push(word.question);
+                                    } else {
+                                        Solver.crossword[i][word.firstLetter[1]].question.push(word.question);
                                     }
                                     count++;
                                 }
@@ -211,10 +218,13 @@ let Solver = {
                                 for(let i = word.firstLetter[1]; i < word.firstLetter[1] + word.word.length; i++) {
                                     if(!Solver.crossword[word.firstLetter[0]][i].letter) {
                                         Solver.amountLetters++;
-                                    }
-                                    Solver.crossword[word.firstLetter[0]][i] = {
-                                        letter: word.word[count],
-                                        question: word.question
+                                        Solver.crossword[word.firstLetter[0]][i] = {
+                                            letter: word.word[count],
+                                            question: []
+                                        }
+                                        Solver.crossword[word.firstLetter[0]][i].question.push(word.question);
+                                    } else {
+                                        Solver.crossword[word.firstLetter[0]][i].question.push(word.question);
                                     }
                                     count++;
                                 }
@@ -232,6 +242,7 @@ let Solver = {
         })
 
         btnCheck.addEventListener('click', e => {
+            e.preventDefault();
             let notEmpty = 0;
             let rightLetters = 0;
             for(let i = 0; i < Solver.lenTR; i++) {
@@ -243,19 +254,24 @@ let Solver = {
                     if(Solver.crossword[i][j].letter &&
                         Solver.crossword[i][j].letter == myLetter.childNodes[1].value) {
                         rightLetters++;
+                    } else if (Solver.crossword[i][j].letter) {
+                        myLetter.classList.add('wrong');
+                        myLetter.innerHTML = Solver.crossword[i][j].letter;
                     }
                 }
             }
-            console.log(notEmpty, Solver.amountLetters);
             if(Solver.crossword.length == 0) {
                 alert("Кроссворд не загружен!");
             } else if(notEmpty < Solver.amountLetters) {
                 alert("Для начала заполните все клеточки!");
             } else {
-                alert(`Правильность выполнения: ${(rightLetters / Solver.amountLetters * 100).toFixed(3)}%`);
-                Solver.procents.push(Number((rightLetters / Solver.amountLetters * 100).toFixed(3)));
-                db.ref('crosswords/' + idInput.value).update({procents: Solver.procents, views: Solver.views + 1});
-                window.location.hash = '/portf';
+                setTimeout(() => {
+                    alert(`Правильность выполнения: ${(rightLetters / Solver.amountLetters * 100).toFixed(3)}%`);
+                    Solver.procents.push(Number((rightLetters / Solver.amountLetters * 100).toFixed(3)));
+                    db.ref('crosswords/' + idInput.value).update({procents: Solver.procents, views: Solver.views + 1});
+                    window.location.hash = '/portf';
+                }, 500);
+                
             }
         });
     },
@@ -275,6 +291,19 @@ let Solver = {
             } else {
                 document.getElementById('definition').replaceWith(question);
             }
+
+            for(let i = 0; i < Solver.lenTR; i++) {
+                for(let j = 0; j < Solver.lenTD; j++) {
+                    const myLetter = document.getElementById(i + '-' + j);
+                    if(Solver.crossword[i][j].question && (
+                        Solver.crossword[i][j].question.includes(quest[0]) ||
+                        Solver.crossword[i][j].question.includes(quest[1]))) {
+                        myLetter.classList.add("solve");
+                    } else {
+                        myLetter.classList.remove("solve");
+                    }
+                }
+            }
         };
 
         letters.forEach(l => {
@@ -282,6 +311,7 @@ let Solver = {
             l.addEventListener('click', eventListener);
         });
     },
+
     clearAll: () => {
         Solver.lenTR = 0;
         Solver.lenTD = 0;
