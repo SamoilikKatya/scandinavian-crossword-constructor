@@ -44,7 +44,7 @@ const router = async () => {
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
     let page = routes[parsedURL] ? routes[parsedURL] : Error404;
     if(page == Portfolio) {
-        db.ref('crosswords').on('value', function(snapshot) {
+        db.ref('crosswords').once('value', function(snapshot) {
             all.push(snapshot.val());
             content.innerHTML = page.render(all, user);
         });
@@ -53,7 +53,7 @@ const router = async () => {
         content.innerHTML = await page.render(user);
         await page.afterRender();
     } else if(page == Answers) {
-        db.ref('crosswords/' + request.id).on('value', function(snapshot) {
+        db.ref('crosswords/' + request.id).once('value', function(snapshot) {
             content.innerHTML = page.render(snapshot.val().answers);
         });
         await page.afterRender();
@@ -90,7 +90,6 @@ window.addEventListener('hashchange', router);
 window.addEventListener('DOMContentLoaded', () => {
     auth.onAuthStateChanged(firebaseUser => {
         if(firebaseUser){
-            
             user = firebaseUser.email;
             window.location.hash = '/portf';
         } else {

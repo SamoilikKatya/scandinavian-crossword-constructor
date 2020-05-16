@@ -268,7 +268,8 @@ let Constructor = {
                                 author: Constructor.user,
                                 answers: tempArr
                             });
-                            window.location.hash = '/portf';
+                            location.reload();
+                            //window.location.hash = '/portf';
                         } else {
                             alert("Кроссворд с таким id уже существует!");
                         }
