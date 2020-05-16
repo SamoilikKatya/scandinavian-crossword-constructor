@@ -1,7 +1,8 @@
 let Constructor = {
-    render: async () => {
+    render: async (user) => {
         Constructor.lenTR = 10;
         Constructor.lenTD = 10;
+        Constructor.user = user;
         return `
         <div class="content">
                 <div class="crossword" id="crossword">
@@ -104,6 +105,8 @@ let Constructor = {
     selectedTD: [],
     wordQuestion: [],
     isVertical: false,
+    user: null,
+    currentAnswer: [],
 
     afterRender: async () => {
         const btnUp = document.querySelector('.up');
@@ -239,18 +242,31 @@ let Constructor = {
 
         btnCrosswSave.addEventListener('click', e => {
             let id = document.querySelector('.save input').value;
-            if(id) {
+            if(id && id != 0) {
                 if(Constructor.wordQuestion.length) {
+                    for(let i=0; i < Constructor.lenTR; i++) {
+                        let row = [];
+                        for(let j = 0; j < Constructor.lenTD; j++) {
+                            let currentID = i + "-" + j;
+                            let currentLetter = document.getElementById(currentID).innerHTML;
+                            row.push(currentLetter == '&nbsp;' ? 0 : currentLetter);
+                        }
+                        Constructor.currentAnswer.push(row);
+                    }
                     const allID = [];
                     db.ref('crosswords/' + id).on('value', function(snapshot) {
                         allID.push(snapshot.val());
                         if(allID[0] == null) {
+                            let tempArr = [];
+                            tempArr.push( Constructor.currentAnswer);
                             db.ref('crosswords/' + id).set({
                                 words: Constructor.wordQuestion,
                                 lenTD: Constructor.lenTD,
                                 lenTR: Constructor.lenTR,
                                 views: 0,
-                                procents: []
+                                procents: [1313],
+                                author: Constructor.user,
+                                answers: tempArr
                             });
                             window.location.hash = '/portf';
                         } else {
@@ -261,7 +277,7 @@ let Constructor = {
                     alert("Кроссворд не может быть пустым!");
                 }
             } else {
-                alert("Введите id!!");
+                alert("Недопустимый id!!");
             }
         })
 

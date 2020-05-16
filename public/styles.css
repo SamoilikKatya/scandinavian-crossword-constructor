@@ -328,6 +328,7 @@ td > input {
     align-items: flex-start;
     justify-content: space-around;
     font-size: 16px;
+    margin-bottom: 20px;
 }
 .crossword-item {
     width: 25%;
@@ -341,6 +342,16 @@ td > input {
     display: grid;
     grid-auto-rows: 3;
     grid-auto-columns: 80% 20%;
+}
+.answer-item {
+    width: 25%;
+    margin: 40px;
+    margin-bottom: 0;
+    overflow: auto;
+}
+.stat > h2 {
+    margin: 3% 40% -2% 40%;
+    color:  #100873;
 }
 .item-title {
     grid-row: 1;
@@ -367,13 +378,26 @@ td > input {
     margin-left: 10px;
     margin-top: 10px;
 }
-.item-title img {
+.item-title a {
     grid-column: 2;
 }
 .item-title img {
     margin-left: -5px;
     margin-top: 10px;
     width: 30px;
+}
+.mine {
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #dfccc8;
 }
 .views {
     margin-left: 10px;
