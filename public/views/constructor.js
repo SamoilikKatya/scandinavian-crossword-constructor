@@ -233,7 +233,6 @@ let Constructor = {
                         document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.add('selected');
                     });
                 }
-
                 const instr = document.getElementById('instructions');
                 let def = document.createElement('div');
                 def.setAttribute('class', "definition");
@@ -258,10 +257,10 @@ let Constructor = {
                         if(toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
                             toSelect[1] == Constructor.selectedTD[0].toSelect[1]) {
                                 document.getElementById('my-tr').insertBefore(newTD, document.getElementById('my-tr').childNodes[1]);
-                        } else {
+                        } else if(toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] &&
+                            toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1]) {
                             document.getElementById('my-tr').appendChild(newTD);
                         }
-                        
                     } else if (index == 0) {
                         document.getElementById('my-tr').removeChild(document.getElementById('my-tr').childNodes[1])
                     } else {
