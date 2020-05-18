@@ -31,9 +31,11 @@ let Portfolio = {
         <div class="crossword-item ${color}">
             <div class="item-title">
                 <h3>${title}</h3>
-                <a href="#/solve/${title}">
-                    <img src="img/watch-crossword.png">
-                </a>
+                <div class="item-title-links">
+                    <a href="#/solve/${title}">
+                        <img src="img/watch-crossword.png">
+                    </a>
+                </div>
             </div>
             <p class="views">Количество решений</p>
             <p class="amount-views">${views}</p>
@@ -53,9 +55,14 @@ let Portfolio = {
             });
 
             const mineItems = document.querySelectorAll('[class~="mine"]');
-            mineItems.forEach(item => item.addEventListener('click', e => {
-                window.location.hash = `/answers/${item.childNodes[1].innerHTML}`;
-            }))
+            mineItems.forEach(item => {
+                let lnkAnswers = document.createElement('a');
+                let imgAnswers = document.createElement('img');
+                imgAnswers.setAttribute('src', 'img/answers.png')
+                lnkAnswers.appendChild(imgAnswers);
+                lnkAnswers.setAttribute('href', `#/answers/${item.childNodes[1].innerHTML}`);
+                item.lastElementChild.append(lnkAnswers);
+            });
 
         }, 2000);
         

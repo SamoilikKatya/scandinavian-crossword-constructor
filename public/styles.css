@@ -321,7 +321,9 @@ td > input {
     font-weight: bold;
 }
 
-
+td input {
+    text-transform: uppercase;
+}
 .crossword-list {
     display: flex;
     flex-flow: row wrap;
@@ -378,8 +380,12 @@ td > input {
     margin-left: 10px;
     margin-top: 10px;
 }
-.item-title a {
+.item-title-links {
     grid-column: 2;
+    margin-left: -10px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 .item-title img {
     margin-left: -5px;

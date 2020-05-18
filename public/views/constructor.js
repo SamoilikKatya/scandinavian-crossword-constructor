@@ -74,7 +74,7 @@ let Constructor = {
         return `
         <p class="my-word">Ваше слово:</p>
         <table class="word">
-            <tr>
+            <tr id="my-tr">
                 ${markup}
             </tr>
         </table>
@@ -179,41 +179,54 @@ let Constructor = {
         tbody.addEventListener('click', e => {
             Constructor.isNoTouch = false;
             if(!Constructor.isNoTouch) {
+                let index = -1;
                 const toSelect = e.target.id.split('-').map(e => Number(e));
-                if(Constructor.selectedTD.length == 0) {
-                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
-                } else if (Constructor.selectedTD.length == 1 && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
-                    (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1 || toSelect[1] == Constructor.selectedTD[0].toSelect[1] + 1)) {
-                        Constructor.isVertical = false;
+                if(toSelect.length == 2) {
+                    if(Constructor.selectedTD.length == 0) {
                         Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
-                        Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
-                } else if (Constructor.selectedTD.length == 1 && toSelect[1] == Constructor.selectedTD[0].toSelect[1] &&
-                    (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1 || toSelect[0] == Constructor.selectedTD[0].toSelect[0] + 1)) {
-                        Constructor.isVertical = true;
-                        Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
-                        Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
-                } else if(!Constructor.isVertical && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
-                    (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1 ||
-                    toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1] + 1)) {
+                    } else if (Constructor.selectedTD.length == 1 && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
+                        (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1 || toSelect[1] == Constructor.selectedTD[0].toSelect[1] + 1)) {
+                            Constructor.isVertical = false;
                             Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
                             Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
-                } else if(Constructor.isVertical && toSelect[1] == Constructor.selectedTD[0].toSelect[1] &&
-                    (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1 ||
-                    toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] + 1)) {
+                    } else if (Constructor.selectedTD.length == 1 && toSelect[1] == Constructor.selectedTD[0].toSelect[1] &&
+                        (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1 || toSelect[0] == Constructor.selectedTD[0].toSelect[0] + 1)) {
+                            Constructor.isVertical = true;
                             Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
                             Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
-                } else if((toSelect[0] == Constructor.selectedTD[0].toSelect[0] && toSelect[1] == Constructor.selectedTD[0].toSelect[1]) ||
-                    (toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] &&
-                    toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1])) {
-                        Constructor.selectedTD.splice(Constructor.selectedTD.indexOf({toSelect: toSelect, value: e.target.innerHTML}), 1);
-                        document.getElementById(e.target.id).classList.remove('selected');
-                } else {
-                    Constructor.selectedTD.forEach(el => {
-                        document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.remove('selected');
-                    });
-                    Constructor.selectedTD = [];
-                    Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                    } else if(!Constructor.isVertical && toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
+                        (toSelect[1] == Constructor.selectedTD[0].toSelect[1] - 1 ||
+                        toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1] + 1)) {
+                                Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                                Constructor.selectedTD.sort((a, b) => a.toSelect[1] > b.toSelect[1] ? 1 : -1);
+                    } else if(Constructor.isVertical && toSelect[1] == Constructor.selectedTD[0].toSelect[1] &&
+                        (toSelect[0] == Constructor.selectedTD[0].toSelect[0] - 1 ||
+                        toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] + 1)) {
+                                Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                                Constructor.selectedTD.sort((a, b) => a.toSelect[0] > b.toSelect[0] ? 1 : -1);
+                    } else if((toSelect[0] == Constructor.selectedTD[0].toSelect[0] && toSelect[1] == Constructor.selectedTD[0].toSelect[1]) ||
+                        (toSelect[0] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[0] &&
+                        toSelect[1] == Constructor.selectedTD[Constructor.selectedTD.length - 1].toSelect[1])) {
+                            
+                            for(let i in Constructor.selectedTD) {
+                                if(Constructor.selectedTD[i].toSelect[0] == toSelect[0] &&
+                                    Constructor.selectedTD[i].toSelect[1] == toSelect[1]) {
+                                        index = i;
+                                        break;
+                                    }
+                            }
+                            Constructor.selectedTD.splice(index, 1);
+                            console.log(Constructor.selectedTD);
+                            document.getElementById(e.target.id).classList.remove('selected');
+                    } else {
+                        Constructor.selectedTD.forEach(el => {
+                            document.getElementById(el.toSelect[0] + '-' + el.toSelect[1]).classList.remove('selected');
+                        });
+                        Constructor.selectedTD = [];
+                        Constructor.selectedTD.push({toSelect: toSelect, value: e.target.innerHTML});
+                    }
                 }
+                
 
                 if(Constructor.selectedTD.length > 1) {
                     Constructor.selectedTD.forEach(el => {
@@ -227,16 +240,34 @@ let Constructor = {
                 def.setAttribute('id', "definition");
                 def.innerHTML = Constructor.renderDef(Constructor.selectedTD.length);
                 
-                if(instr && Constructor.selectedTD.length) {
+                if(instr && Constructor.selectedTD.length == 1) {
                     document.getElementById('instructions').replaceWith(def);
+                    Constructor.listenersForWord();
+                } else if(Constructor.selectedTD.length == 1) {
+                    document.getElementById('definition').replaceWith(def);
+                    Constructor.listenersForWord();
                 } else if(!Constructor.selectedTD.length) {
                     document.getElementById('definition').hidden = true;
-                } else {
-                    document.getElementById('definition').replaceWith(def);
+                } else if(Constructor.selectedTD.length > 1) {
+                    if(index == -1) {
+                        let newTD = document.createElement('td');
+                        let newInput = document.createElement('input');
+                        newInput.setAttribute('maxlength', '1');
+                        newInput.setAttribute('type', 'text');
+                        newTD.appendChild(newInput);
+                        if(toSelect[0] == Constructor.selectedTD[0].toSelect[0] &&
+                            toSelect[1] == Constructor.selectedTD[0].toSelect[1]) {
+                                document.getElementById('my-tr').insertBefore(newTD, document.getElementById('my-tr').childNodes[1]);
+                        } else {
+                            document.getElementById('my-tr').appendChild(newTD);
+                        }
+                        
+                    } else if (index == 0) {
+                        document.getElementById('my-tr').removeChild(document.getElementById('my-tr').childNodes[1])
+                    } else {
+                        document.getElementById('my-tr').removeChild(document.getElementById('my-tr').lastChild)
+                    }
                 }
-
-                Constructor.listenersForWord();
-                
             }
         });
 
@@ -291,6 +322,7 @@ let Constructor = {
         const wordTR = document.querySelector('.word tr');
 
         btnSaveWord.addEventListener('click', e => {   
+    
             let word = '';
             document.querySelectorAll('.word input').forEach(el => word += el.value);
             let question = document.querySelector('.question').value;
@@ -321,11 +353,11 @@ let Constructor = {
                     }
                     Constructor.wordQuestion.push({word: word, question: question, firstLetter: Constructor.selectedTD[0].toSelect,
                         isVertical: isVertical});
-                    Constructor.selectedTD = [];
+                    
                 } else {
                     alert('Вопрос для данного слова уже определен!');
                 }
-                
+                Constructor.selectedTD = [];
             }
         });
         

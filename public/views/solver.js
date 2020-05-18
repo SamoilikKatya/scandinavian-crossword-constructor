@@ -272,9 +272,6 @@ let Solver = {
                     if(Solver.crossword[i][j].letter &&
                         Solver.crossword[i][j].letter == myLetter.childNodes[1].value) {
                         rightLetters++;
-                    } else if (Solver.crossword[i][j].letter) {
-                        myLetter.classList.add('wrong');
-                        myLetter.innerHTML = Solver.crossword[i][j].letter;
                     }
                 }
             }
@@ -283,6 +280,17 @@ let Solver = {
             } else if(notEmpty < Solver.amountLetters) {
                 alert("Для начала заполните все клеточки!");
             } else {
+                for(let i = 0; i < Solver.lenTR; i++) {
+                    for(let j = 0; j < Solver.lenTD; j++) {
+                        const myLetter = document.getElementById(i + '-' + j);
+                        if(Solver.crossword[i][j].letter &&
+                            Solver.crossword[i][j].letter == myLetter.childNodes[1].value) {
+                        } else if (Solver.crossword[i][j].letter) {
+                            myLetter.classList.add('wrong');
+                            myLetter.innerHTML = Solver.crossword[i][j].letter;
+                        }
+                    }
+                }
                 setTimeout(() => {
                     alert(`Правильность выполнения: ${(rightLetters / Solver.amountLetters * 100).toFixed(3)}%`);
                     Solver.procents.push(Number((rightLetters / Solver.amountLetters * 100).toFixed(3)));

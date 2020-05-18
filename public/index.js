@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
     auth.onAuthStateChanged(firebaseUser => {
         if(firebaseUser){
             user = firebaseUser.email;
-            window.location.hash = '/portf';
+            window.location.hash = '/construct';
         } else {
             window.location.hash = '/';
         }
