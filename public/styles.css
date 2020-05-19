@@ -332,6 +332,12 @@ td input {
     font-size: 16px;
     margin-bottom: 20px;
 }
+.answers-list {
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: row wrap;
+}
 .crossword-item {
     width: 25%;
     height: 120px;
@@ -346,8 +352,7 @@ td input {
     grid-auto-columns: 80% 20%;
 }
 .answer-item {
-    width: 25%;
-    margin: 40px;
+    margin: 40px auto;
     margin-bottom: 0;
     overflow: auto;
 }
@@ -633,6 +638,14 @@ button:focus {
         align-items: flex-start;
         justify-content: space-between;
     }
+    .answer-item {
+        padding-top: 0;
+        margin: 60px auto;
+        margin-bottom: 0;
+    }
+    .answer-item table{
+        margin: 0 auto;;
+    }
     .crossword-item {
         padding-top: 0;
         width: 35%;
@@ -660,6 +673,13 @@ button:focus {
         margin-top: 30px;
         margin-left: 30px;
         padding: 0 5%;
+    }
+
+    .item-title-links {
+        grid-column: 2;
+        margin-left: -30px;
+        display: flex;
+        justify-content: space-around;
     }
 }
 

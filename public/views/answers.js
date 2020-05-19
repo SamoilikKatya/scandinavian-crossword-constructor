@@ -4,9 +4,9 @@ let Answers = {
         Answers.etalonAnswer = Answers.all[0];
         return `
         <div class="stat"><h2>Эталонное решение</h2></div>
-        <div class="crossword-list">${Answers.renderItem(Answers.etalonAnswer.length, Answers.etalonAnswer[0].length, 0)}</div>
+        <div class="answers-list">${Answers.renderItem(Answers.etalonAnswer.length, Answers.etalonAnswer[0].length, 0)}</div>
         <div class="stat"><h2>Статистика решений</h2></div>
-        <div class="crossword-list">${Answers.listItems()}</div>
+        <div class="answers-list">${Answers.listItems()}</div>
         `
     },
 
