@@ -182,6 +182,13 @@ td > input {
 .not-empty, .not-empty > input, .selected {
     background: #dfccc8;
 }
+.solve, .solve > input {
+    background: #8CBDF9;
+}
+
+.wrong, .wrong > input {
+    background: red;
+}
 .instructions {
     grid-column: 7 / 9;
     padding: 7px;
@@ -314,13 +321,22 @@ td > input {
     font-weight: bold;
 }
 
-
+td input {
+    text-transform: uppercase;
+}
 .crossword-list {
     display: flex;
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: space-around;
     font-size: 16px;
+    margin-bottom: 20px;
+}
+.answers-list {
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: row wrap;
 }
 .crossword-item {
     width: 25%;
@@ -334,6 +350,15 @@ td > input {
     display: grid;
     grid-auto-rows: 3;
     grid-auto-columns: 80% 20%;
+}
+.answer-item {
+    margin: 40px auto;
+    margin-bottom: 0;
+    overflow: auto;
+}
+.stat > h2 {
+    margin: 3% 40% -2% 40%;
+    color:  #100873;
 }
 .item-title {
     grid-row: 1;
@@ -360,13 +385,30 @@ td > input {
     margin-left: 10px;
     margin-top: 10px;
 }
-.item-title img {
+.item-title-links {
     grid-column: 2;
+    margin-left: -10px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 .item-title img {
     margin-left: -5px;
     margin-top: 10px;
     width: 30px;
+}
+.mine {
+    background: 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px -37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 111px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 37px 37px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 0px, 
+        linear-gradient(135deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px, 
+        linear-gradient(225deg, transparent 24.5%, #449CB4 24.6%, transparent 24.8%) 74px 74px;
+    background-size: 148px 148px;
+    background-color: #dfccc8;
 }
 .views {
     margin-left: 10px;
@@ -596,6 +638,14 @@ button:focus {
         align-items: flex-start;
         justify-content: space-between;
     }
+    .answer-item {
+        padding-top: 0;
+        margin: 60px auto;
+        margin-bottom: 0;
+    }
+    .answer-item table{
+        margin: 0 auto;;
+    }
     .crossword-item {
         padding-top: 0;
         width: 35%;
@@ -623,6 +673,13 @@ button:focus {
         margin-top: 30px;
         margin-left: 30px;
         padding: 0 5%;
+    }
+
+    .item-title-links {
+        grid-column: 2;
+        margin-left: -30px;
+        display: flex;
+        justify-content: space-around;
     }
 }
 
